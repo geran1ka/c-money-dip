@@ -1,0 +1,40 @@
+.exit,
+.nav {
+  display: flex;
+  font-family: Nunito;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 20px;
+}
+
+.nav {
+  gap: 30px;
+
+  @media (max-width: 768px) {
+    font-size: 12px;
+    gap: 15px;
+  }
+}
+
+.exit {
+  align-items: center;
+  background-color: initial;
+  border: none;
+  color: #fff;
+  gap: 5px;
+
+  @media (max-width: 768px) {
+    font-size: 12px;
+  }
+}
+
+.arrow {
+  @media (max-width: 768px) {
+    max-width: 10px;
+  }
+}
+
+.active {
+  color: #c6b6d7;
+  color: var(--text);
+}

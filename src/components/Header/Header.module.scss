@@ -1,0 +1,14 @@
+.header {
+  background-color: var(--header);
+  padding: 20px 0;
+
+  @media (max-width: 768px) {
+    padding: 10px 0;
+  }
+}
+
+.container {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}

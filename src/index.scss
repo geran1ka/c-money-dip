@@ -1,0 +1,110 @@
+@font-face {
+  font-family: Comfortaa;
+  font-style: normal;
+  font-weight: 700;
+  src:
+    local(""),
+    url(/fonts/comfortaa-v40-cyrillic-700.bc1657ffe7d1c15ef896.woff2)
+      format("woff2"),
+    url(/fonts/comfortaa-v40-cyrillic-700.8b9ee79ac461735db231.woff)
+      format("woff");
+}
+@font-face {
+  font-family: Nunito;
+  font-style: normal;
+  font-weight: 400;
+  src:
+    local(""),
+    url(/fonts/nunito-v24-cyrillic-regular.ac1741731b39bc1f5abf.woff2)
+      format("woff2"),
+    url(/fonts/nunito-v24-cyrillic-regular.3b59f67332cde536e48c.woff)
+      format("woff");
+}
+@font-face {
+  font-family: Nunito;
+  font-style: normal;
+  font-weight: 600;
+  src:
+    local(""),
+    url(/fonts/nunito-v24-cyrillic-600.ea9bb316e858c376c2ab.woff2)
+      format("woff2"),
+    url(/fonts/nunito-v24-cyrillic-600.259682ca852c1e33be44.woff) format("woff");
+}
+@font-face {
+  font-family: Nunito;
+  font-style: normal;
+  font-weight: 700;
+  src:
+    local(""),
+    url(/fonts/nunito-v24-cyrillic-700.17457b80884d06340e5d.woff2)
+      format("woff2"),
+    url(/fonts/nunito-v24-cyrillic-700.28f98bfe91c387ab77d0.woff) format("woff");
+}
+:root {
+  --header: #392350;
+  --bgcolor: #210b36;
+  --text: #c6b6d7;
+  --pink: #9c19ca;
+  --blue: #4b00ca;
+}
+html {
+  box-sizing: border-box;
+  position: relative;
+}
+*,
+:after,
+:before {
+  box-sizing: inherit;
+}
+body {
+  background-color: #210b36;
+  background-color: var(--bgcolor);
+  color: #fff;
+  font-family:
+    Merriweather Sans,
+    sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  margin: initial;
+  min-height: 100vh;
+  min-width: 320px;
+  padding-bottom: 200px;
+}
+img {
+  height: auto;
+  max-width: 100%;
+}
+button {
+  cursor: pointer;
+  padding: 0;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+ul {
+  list-style: none;
+  padding: 0;
+}
+fieldset,
+figure,
+h1,
+h2,
+h3,
+p,
+ul {
+  margin: 0;
+}
+iframe {
+  border: none;
+}
+.visually-hidden {
+  clip: rect(1px 1px 1px 1px);
+  clip: rect(1px, 1px, 1px, 1px);
+  border: 0;
+  height: 1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
