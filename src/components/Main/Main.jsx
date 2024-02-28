@@ -1,4 +1,3 @@
-import { Container } from "../Container/Container";
 import s from "./Main.module.scss";
 import { CurrencyList } from "../CurrencyList/CurrencyList";
 import { Auth } from "../Auth/Auth";
@@ -9,11 +8,10 @@ export const Main = () => {
 
   return (
     <main className={s.main}>
-      {/* <Auth /> */}
-      <Container>
-        {/* <CurrencyList /> */}
-        <Check />
-      </Container>
+      <Auth />
+
+      <CurrencyList />
+      <Check />
     </main>
   );
 };

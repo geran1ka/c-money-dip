@@ -2,41 +2,45 @@
   font-family: Comfortaa;
   font-style: normal;
   font-weight: 700;
-  src: local(''),
+  src:
+    local(""),
     url(../fonts/comfortaa-v40-cyrillic-700.bc1657ffe7d1c15ef896.woff2)
-      format('woff2'),
+      format("woff2"),
     url(../fonts/comfortaa-v40-cyrillic-700.8b9ee79ac461735db231.woff)
-      format('woff');
+      format("woff");
 }
 @font-face {
   font-family: Nunito;
   font-style: normal;
   font-weight: 400;
-  src: local(''),
+  src:
+    local(""),
     url(../fonts/nunito-v24-cyrillic-regular.ac1741731b39bc1f5abf.woff2)
-      format('woff2'),
+      format("woff2"),
     url(../fonts/nunito-v24-cyrillic-regular.3b59f67332cde536e48c.woff)
-      format('woff');
+      format("woff");
 }
 @font-face {
   font-family: Nunito;
   font-style: normal;
   font-weight: 600;
-  src: local(''),
+  src:
+    local(""),
     url(../fonts/nunito-v24-cyrillic-600.ea9bb316e858c376c2ab.woff2)
-      format('woff2'),
+      format("woff2"),
     url(../fonts/nunito-v24-cyrillic-600.259682ca852c1e33be44.woff)
-      format('woff');
+      format("woff");
 }
 @font-face {
   font-family: Nunito;
   font-style: normal;
   font-weight: 700;
-  src: local(''),
+  src:
+    local(""),
     url(../fonts/nunito-v24-cyrillic-700.17457b80884d06340e5d.woff2)
-      format('woff2'),
+      format("woff2"),
     url(../fonts/nunito-v24-cyrillic-700.28f98bfe91c387ab77d0.woff)
-      format('woff');
+      format("woff");
 }
 :root {
   --header: #392350;
@@ -58,7 +62,9 @@ body {
   background-color: #210b36;
   background-color: var(--bgcolor);
   color: #fff;
-  font-family: Merriweather Sans, sans-serif;
+  font-family:
+    Merriweather Sans,
+    sans-serif;
   font-size: 16px;
   font-weight: 400;
   margin: initial;
@@ -288,7 +294,7 @@ iframe {
   margin-bottom: 20px;
 }
 .Card_balance__6XpLd:after {
-  content: ' ₽';
+  content: " ₽";
 }
 .Card_info__dEaPs {
   color: var(--text);
@@ -568,7 +574,7 @@ iframe {
   line-height: 20px;
 }
 .Exchange_balance__Bp6gG:after {
-  content: ' ₽';
+  content: " ₽";
 }
 .Exchange_wrapper__vGtDi {
   display: flex;

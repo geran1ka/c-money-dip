@@ -1,6 +1,8 @@
 import classNames from "classnames";
-import { Container } from "../Container/Container";
 import s from "./Check.module.scss";
+import { Container } from "../Container/Container";
+import { Transaction } from "./Transaction/Transaction";
+import { History } from "./History/History";
 
 export const Check = () => {
   console.log("Check");
@@ -28,141 +30,20 @@ export const Check = () => {
             Вернуться
           </a>
         </div>
-        <div className="Account_dynamic__q70XE">
-          <div className="Account_dynamic__header__iCPTa">
-            <h3 className="Account_dynamic__title__JwsS2">Динамика</h3>
-            <span className="Account_dynamic__year__22YBJ">2022</span>
-            <select className="Account_dynamic__select__7zXlN">
-              <option hidden="">Год</option>
+        <div className={s.Account_dynamic__q70XE}>
+          <div className={s.Account_dynamic__header__iCPTa}>
+            <h3 className={s.Account_dynamic__title__JwsS2}>Динамика</h3>
+            <span className={s.Account_dynamic__year__22YBJ}>2022</span>
+            <select className={s.Account_dynamic__select__7zXlN}>
+              <option hidden>Год</option>
               <option>2022</option>
               <option>2021</option>
               <option>2020</option>
             </select>
           </div>
         </div>
-        <div className="Account_history__qgCwN">
-          <h3 className="Account_history__title__X1e2S">История переводов</h3>
-          <div className="Table_table__container__-ExoA">
-            <table className="Table_table__lsukp">
-              <thead className="Table_thead__tkFEQ">
-                <tr>
-                  <th className="Table_th__yQviT">Счет</th>
-                  <th className="Table_th__yQviT">Сумма</th>
-                  <th className="Table_th__yQviT">Дата</th>
-                </tr>
-              </thead>
-              <tbody className="Table_tbody__-S3Fd">
-                <tr>
-                  <td className="Table_td__HXWLH undefined">
-                    78533416338616366622402206
-                  </td>
-                  <td className="Table_td__HXWLH Table_td_middle__bXwqs">
-                    725.03
-                  </td>
-                  <td className="Table_td__HXWLH Table_td__date__0bfUN">
-                    23.07.2022
-                  </td>
-                </tr>
-                <tr>
-                  <td className="Table_td__HXWLH undefined">
-                    03076315655672621035503853
-                  </td>
-                  <td className="Table_td__HXWLH Table_td_middle__bXwqs">
-                    754.63
-                  </td>
-                  <td className="Table_td__HXWLH Table_td__date__0bfUN">
-                    23.07.2022
-                  </td>
-                </tr>
-                <tr>
-                  <td className="Table_td__HXWLH undefined">
-                    77143036472230035143835017
-                  </td>
-                  <td className="Table_td__HXWLH Table_td_middle__bXwqs">
-                    575.73
-                  </td>
-                  <td className="Table_td__HXWLH Table_td__date__0bfUN">
-                    23.07.2022
-                  </td>
-                </tr>
-                <tr>
-                  <td className="Table_td__HXWLH undefined">
-                    06815665521313043767184340
-                  </td>
-                  <td className="Table_td__HXWLH Table_td_middle__bXwqs">
-                    128.14
-                  </td>
-                  <td className="Table_td__HXWLH Table_td__date__0bfUN">
-                    23.07.2022
-                  </td>
-                </tr>
-                <tr>
-                  <td className="Table_td__HXWLH undefined">
-                    08045754042622752807473705
-                  </td>
-                  <td className="Table_td__HXWLH Table_td_middle__bXwqs">
-                    602.33
-                  </td>
-                  <td className="Table_td__HXWLH Table_td__date__0bfUN">
-                    23.07.2022
-                  </td>
-                </tr>
-                <tr>
-                  <td className="Table_td__HXWLH undefined">
-                    38623857350546387857144303
-                  </td>
-                  <td className="Table_td__HXWLH Table_td_middle__bXwqs">
-                    318.7
-                  </td>
-                  <td className="Table_td__HXWLH Table_td__date__0bfUN">
-                    23.07.2022
-                  </td>
-                </tr>
-                <tr>
-                  <td className="Table_td__HXWLH undefined">
-                    37557537730030217658338836
-                  </td>
-                  <td className="Table_td__HXWLH Table_td_middle__bXwqs">
-                    358.79
-                  </td>
-                  <td className="Table_td__HXWLH Table_td__date__0bfUN">
-                    23.07.2022
-                  </td>
-                </tr>
-                <tr>
-                  <td className="Table_td__HXWLH undefined">
-                    16866556611742274532042336
-                  </td>
-                  <td className="Table_td__HXWLH Table_td_middle__bXwqs">
-                    518.05
-                  </td>
-                  <td className="Table_td__HXWLH Table_td__date__0bfUN">
-                    23.07.2022
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <div className="Account_transaction__fgGIA">
-          <h3 className="Account_title__oytHW Account_transaction__title__5k3f-">
-            Перевод
-          </h3>
-          <form className="Account_transaction__form__mKYvj">
-            <div className="Account_transaction__input-wrap__ORoWP">
-              <label className="Account_transaction__label__rsShR">Счет</label>
-              <input className="Account_transaction__input__rH-Ae" name="to" />
-            </div>
-            <div className="Account_transaction__input-wrap__ORoWP">
-              <label className="Account_transaction__label__rsShR">Сумма</label>
-              <input
-                className="Account_transaction__input__rH-Ae"
-                name="amount"
-              />
-            </div>
-            <button className="Account_button__3jGkT button">Перевести</button>
-          </form>
-        </div>
+        <History />
+        <Transaction />
       </div>
     </Container>
   );

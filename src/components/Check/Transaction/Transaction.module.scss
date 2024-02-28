@@ -10,21 +10,21 @@
   font-size: 26px;
   font-weight: 700;
   line-height: 29px;
-}
-
-.title {
   margin-bottom: 40px;
 }
+
 .form {
   align-items: flex-end;
   display: flex;
   justify-content: space-between;
 }
+
 .wrap {
   display: flex;
   flex-direction: column;
   width: 380px;
 }
+
 .label {
   color: var(--text);
   font-family: Nunito;
@@ -34,12 +34,14 @@
   margin-bottom: 2px;
   padding-left: 15px;
 }
+
 .input {
   border: 2px solid var(--pink);
   border-radius: 10px;
   min-height: 70px;
   padding: 20px;
 }
+
 .button {
   font-family: Nunito;
   font-size: 18px;
