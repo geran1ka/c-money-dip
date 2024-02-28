@@ -1,0 +1,49 @@
+.transaction {
+  display: flex;
+  flex-direction: column;
+  margin-top: 40px;
+  width: 100%;
+}
+
+.title {
+  font-family: Comfortaa;
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 29px;
+}
+
+.title {
+  margin-bottom: 40px;
+}
+.form {
+  align-items: flex-end;
+  display: flex;
+  justify-content: space-between;
+}
+.wrap {
+  display: flex;
+  flex-direction: column;
+  width: 380px;
+}
+.label {
+  color: var(--text);
+  font-family: Nunito;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 20px;
+  margin-bottom: 2px;
+  padding-left: 15px;
+}
+.input {
+  border: 2px solid var(--pink);
+  border-radius: 10px;
+  min-height: 70px;
+  padding: 20px;
+}
+.button {
+  font-family: Nunito;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 25px;
+  padding: 22.5px 143px;
+}
