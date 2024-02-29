@@ -52,6 +52,10 @@
   border-radius: 10px;
   padding: 20px;
 }
+
+.input[aria-invalid="true"] {
+  outline: 2px solid tomato;
+}
 .button {
   font-family: Nunito;
   font-size: 18px;

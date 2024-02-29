@@ -3,15 +3,27 @@ import { URL_API } from "../../const/const";
 
 export const fetchAccessToken = createAsyncThunk(
   "auth/fetchAccessToken",
-  async () => {
-    const response = await fetch(`${URL_API}api/users/accessKey`);
+  async ({ login, password }, { rejectWithValue }) => {
+    console.log("login: ", login);
+    try {
+      const response = await fetch(`${URL_API}/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json;charset=utf-8",
+        },
+        body: JSON.stringify({ login, password }),
+      });
 
-    if (!response.ok) {
-      throw new Error("Не удалось получить токен доступа!");
+      if (!response.ok) {
+        throw new Error("Не удалось получить токен доступа!");
+      }
+
+      const data = await response.json();
+      console.log("data: ", data);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error);
     }
-
-    const data = await response.json();
-    return data.accessKey;
   },
 );
 
@@ -35,8 +47,8 @@ const authSlice = createSlice({
         state.error = null;
       })
       .addCase(fetchAccessToken.fulfilled, (state, action) => {
-        state.accessToken = action.payload;
-        localStorage.setItem("accessToken", action.payload);
+        state.accessToken = action.payload.payload.token;
+        localStorage.setItem("accessToken", action.payload.payload.token);
         state.loading = false;
         state.error = null;
       })

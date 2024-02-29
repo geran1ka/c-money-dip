@@ -2,18 +2,19 @@ import classNames from "classnames";
 import { Container } from "../Container/Container";
 import s from "./Auth.module.scss";
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import { fetchAccessToken } from "../../store/auth/auth.slice";
 
 export const Auth = () => {
-  console.log();
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-    console.log(e.target);
+  const onSubmit = (data) => {
+    dispatch(fetchAccessToken(data));
   };
 
   return (
@@ -23,35 +24,47 @@ export const Auth = () => {
           <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
             <legend className={s.title}>Вход в аккаунт</legend>
             <div className={s.inputWrapper}>
-              <span className={s.error}>{errors.name && errors.name}</span>
+              <span className={s.error}>
+                {errors.login && errors.login.message}
+              </span>
               <label className={s.label}>Логин</label>
               <input
                 className={s.input}
-                {...register("name", {
-                  required: true,
+                {...register("login", {
+                  required: {
+                    value: true,
+                    message: "Введите логин",
+                  },
                   pattern: {
-                    value: /[A-Za-z]{6,}/,
-                    message: "Некорректный логин",
+                    value: /^[a-zA-Z]{6,}$/,
+                    message: "Невалидный логин",
                   },
                 })}
+                aria-invalid={!!errors.login}
               />
             </div>
             <div className={s.inputWrapper}>
-              <span className={s.error}></span>
+              <span className={s.error}>
+                {errors.password && errors.password.message}
+              </span>
               <label className={s.label}>Пароль</label>
               <input
                 type="password"
                 className={s.input}
                 {...register("password", {
-                  required: true,
+                  required: {
+                    value: true,
+                    message: "Введите пароль",
+                  },
                   pattern: {
-                    value: /[a-zA-Z0-9]{6,}/,
-                    message: "Некорректный пароль",
+                    value: /^[a-zA-Z]{6,}$/,
+                    message: "Невалидный пароль",
                   },
                 })}
+                aria-invalid={!!errors.password}
               />
             </div>
-            <button className={classNames(s.button, "button")} type="button">
+            <button className={classNames(s.button, "button")} type="submit">
               Войти
             </button>
           </form>
