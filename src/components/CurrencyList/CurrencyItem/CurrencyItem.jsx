@@ -1,10 +1,11 @@
+import { Link } from "react-router-dom";
 import s from "./CurrencyItem.module.scss";
 
 export const CurrencyItem = ({ props }) => {
   const { id, balance, openCurrensy, lastOperation } = props;
 
   return (
-    <a href="/account">
+    <Link to={`/account/${id}`}>
       <p className={s.id}>{id}</p>
       <p className={s.balance}>{balance.toLocaleString()}</p>
       <div className={s.info}>
@@ -23,6 +24,6 @@ export const CurrencyItem = ({ props }) => {
           )}
         </div>
       </div>
-    </a>
+    </Link>
   );
 };

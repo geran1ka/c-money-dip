@@ -3,9 +3,28 @@ import s from "./CurrencyList.module.scss";
 import { currencies } from "../../data/currencies";
 import { CurrencyItem } from "./CurrencyItem/CurrencyItem";
 import { Container } from "../Container/Container";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { getLocalStorage } from "../../const/localStorage";
+import { useEffect } from "react";
 
 export const CurrencyList = () => {
   console.log();
+  const dispatch = useDispatch();
+  const { accessToken, loading } = useSelector((state) => state.auth);
+  const navigate = useNavigate();
+
+  const accessToken2 = getLocalStorage("accessToken");
+
+  useEffect(() => {
+    if (accessToken) return;
+
+    if (accessToken) {
+      console.log("accessTokenStorage", accessToken);
+    } else {
+      navigate("/auth");
+    }
+  }, [dispatch, accessToken]);
 
   return (
     <Container>

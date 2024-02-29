@@ -1,0 +1,53 @@
+.container {
+  padding-top: 60px;
+}
+.title {
+  font-family: Comfortaa;
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 29px;
+  margin-bottom: 40px;
+}
+.text {
+  color: var(--text);
+  display: inline-block;
+  font-family: Nunito;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 20px;
+  margin-bottom: 30px;
+  width: 70px;
+}
+.text:first-of-type {
+  margin-bottom: 15px;
+}
+.textWhite {
+  font-family: Nunito;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 20px;
+}
+.balance:after {
+  content: " ₽";
+}
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  column-gap: 20px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 20px;
+  }
+}
+
+.loaderContainer {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.rightWrapper {
+  display: flex;
+  flex-direction: column;
+}

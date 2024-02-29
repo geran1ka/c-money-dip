@@ -1,5 +1,6 @@
-.Account_history__qgCwN {
-  max-width: 580px;
+.history {
+  max-width: 560px;
+  width: 100%;
 
   @media (max-width: 768px) {
     margin-bottom: 30px;
@@ -7,7 +8,7 @@
   }
 }
 
-.Account_history__title__X1e2S {
+.title {
   font-family: Comfortaa;
   font-size: 26px;
   font-weight: 700;
@@ -20,10 +21,11 @@
   }
 }
 
-.Table_table__container__ExoA {
+.table__container {
   max-height: 487px;
   overflow-x: hidden;
   overflow-y: auto;
+  width: 100%;
 
   @media (max-width: 768px) {
     max-height: 300px;
@@ -31,11 +33,11 @@
   }
 }
 
-.Table_table__lsukp {
+.table {
   background-color: var(--header);
   border-radius: 10px;
   padding: 20px;
-  width: 580px;
+  width: 100%;
 
   @media (max-width: 768px) {
     max-width: 100%;
@@ -43,7 +45,7 @@
   }
 }
 
-.Table_thead__tkFEQ {
+.thead {
   color: var(--text);
   font-family: Nunito;
   font-size: 15px;
@@ -51,7 +53,7 @@
   line-height: 20px;
 }
 
-.Table_th__yQviT {
+.th {
   border-bottom: 1px solid var(--bgcolor);
   padding: 10px 0 16px 20px;
   text-align: left;
@@ -63,20 +65,20 @@
   }
 }
 
-.Table_th__yQviT:first-child {
+.th:first-child {
   padding-left: 0;
 }
 
-.Table_th__yQviT:nth-child(2) {
+.th:nth-child(2) {
   border-left: 1px solid var(--bgcolor);
   border-right: 1px solid var(--bgcolor);
 }
 
-.Table_th__yQviT:last-child {
+.th:last-child {
   padding-left: 12px;
 }
 
-.Table_tbody__S3Fd {
+.tbody {
   font-family: Nunito;
   font-size: 15px;
   font-weight: 700;
@@ -88,7 +90,7 @@
   }
 }
 
-.Table_td__HXWLH {
+.td {
   padding: 12px 0;
 
   @media (max-width: 768px) {
@@ -97,12 +99,12 @@
   }
 }
 
-.Table_td_middle__bXwqs {
+.middle {
   border-left: 1px solid var(--bgcolor);
   border-right: 1px solid var(--bgcolor);
   padding-left: 20px;
 }
 
-.Table_td__date__0bfUN {
+.date {
   padding-left: 12px;
 }

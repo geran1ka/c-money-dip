@@ -3,6 +3,8 @@ import s from "./Check.module.scss";
 import { Container } from "../Container/Container";
 import { Transaction } from "./Transaction/Transaction";
 import { History } from "./History/History";
+import { Dinamic } from "./Dinamic/Dinamic";
+import { Link } from "react-router-dom";
 
 export const Check = () => {
   console.log("Check");
@@ -14,9 +16,9 @@ export const Check = () => {
           <h2 className={s.Account_title__oytHW}>
             Счет №24051911200915061003240821
           </h2>
-          <a
+          <Link
             className={classNames(s.Account_button__3jGkT, "button")}
-            href="/currencies">
+            to="/">
             <svg
               width="16"
               height="13"
@@ -28,20 +30,9 @@ export const Check = () => {
                 fill="white"></path>
             </svg>
             Вернуться
-          </a>
+          </Link>
         </div>
-        <div className={s.Account_dynamic__q70XE}>
-          <div className={s.Account_dynamic__header__iCPTa}>
-            <h3 className={s.Account_dynamic__title__JwsS2}>Динамика</h3>
-            <span className={s.Account_dynamic__year__22YBJ}>2022</span>
-            <select className={s.Account_dynamic__select__7zXlN}>
-              <option hidden>Год</option>
-              <option>2022</option>
-              <option>2021</option>
-              <option>2020</option>
-            </select>
-          </div>
-        </div>
+        <Dinamic />
         <History />
         <Transaction />
       </div>

@@ -3,6 +3,7 @@
   flex-wrap: wrap;
   justify-content: space-between;
   padding-top: 65px;
+  column-gap: 15px;
 }
 .Account_container__header__MABYz {
   align-items: center;
@@ -17,42 +18,7 @@
   font-weight: 700;
   line-height: 29px;
 }
-.Account_dynamic__q70XE {
-  background: var(--header);
-  border-radius: 10px;
-  margin-top: 50px;
-  max-height: 330px;
-  padding: 20px;
-  width: 580px;
-}
-.Account_dynamic__header__iCPTa {
-  align-items: center;
-  display: flex;
-}
-.Account_dynamic__title__JwsS2 {
-  font-family: Nunito;
-  font-size: 20px;
-  font-weight: 600;
-  line-height: 27px;
-  margin-right: 20px;
-}
-.Account_dynamic__year__22YBJ {
-  color: var(--text);
-  font-family: Nunito;
-  font-size: 15px;
-  font-weight: 400;
-  line-height: 20px;
-}
-.Account_dynamic__select__7zXlN {
-  background-color: initial;
-  border: none;
-  color: var(--text);
-  margin-left: auto;
-  outline: transparent;
-}
-.Account_dynamic__select__7zXlN option {
-  background-color: var(--header);
-}
+
 .Account_button__3jGkT {
   align-items: center;
   display: flex;
@@ -121,10 +87,7 @@
     font-size: 16px;
     padding: 15px 30px;
   }
-  .Account_dynamic__q70XE {
-    margin-bottom: 30px;
-    margin-top: 0;
-  }
+
   .Account_transaction__fgGIA {
     margin-top: 0;
   }

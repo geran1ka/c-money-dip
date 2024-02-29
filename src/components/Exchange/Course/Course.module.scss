@@ -1,0 +1,55 @@
+.wrapper {
+  background: var(--header);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 15px 60px 25px 20px;
+
+  @media (max-width: 768px) {
+    padding-right: 20px;
+  }
+}
+
+.title {
+  font-family: Nunito;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 27px;
+
+  @media (max-width: 768px) {
+    text-align: center;
+  }
+}
+
+.row {
+  align-items: flex-end;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 7px;
+}
+
+.cellFirst {
+  font-family: Nunito;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 20px;
+  vertical-align: bottom;
+}
+
+.cellSecond {
+  border-bottom: 1px solid var(--bgcolor);
+  width: 100%;
+}
+
+.cellThird {
+  align-items: center;
+  display: flex;
+  font-family: Nunito;
+  font-size: 15px;
+  font-weight: 700;
+  gap: 5px;
+  justify-content: flex-end;
+  line-height: 100%;
+  margin-top: 20px;
+}
