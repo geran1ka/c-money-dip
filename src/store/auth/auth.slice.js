@@ -19,7 +19,6 @@ export const fetchAccessToken = createAsyncThunk(
       }
 
       const data = await response.json();
-      console.log("data: ", data);
       return data;
     } catch (error) {
       return rejectWithValue(error);
@@ -47,14 +46,18 @@ const authSlice = createSlice({
         state.error = null;
       })
       .addCase(fetchAccessToken.fulfilled, (state, action) => {
-        state.accessToken = action.payload.payload.token;
-        localStorage.setItem("accessToken", action.payload.payload.token);
+        if (action.payload.payload?.token) {
+          state.accessToken = action.payload.payload?.token;
+          localStorage.setItem("accessToken", action.payload.payload.token);
+        }
         state.loading = false;
-        state.error = null;
+        action.payload?.error
+          ? (state.error = action.payload.error)
+          : (state.error = null);
       })
       .addCase(fetchAccessToken.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message;
+        state.error = action.error;
       });
   },
 });

@@ -2,20 +2,29 @@ import classNames from "classnames";
 import { Container } from "../Container/Container";
 import s from "./Auth.module.scss";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchAccessToken } from "../../store/auth/auth.slice";
+import { useEffect } from "react";
+import { getMessageErrorRu } from "../../helper/getMessageErrorRu";
 
 export const Auth = () => {
   const dispatch = useDispatch();
+
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
   const onSubmit = (data) => {
     dispatch(fetchAccessToken(data));
   };
+
+  const { error } = useSelector((state) => state.auth);
+  useEffect(() => {
+    reset();
+  }, [error, reset]);
 
   return (
     <Container>
@@ -24,7 +33,7 @@ export const Auth = () => {
           <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
             <legend className={s.title}>Вход в аккаунт</legend>
             <div className={s.inputWrapper}>
-              <span className={s.error}>
+              <span className={classNames(s.error, s.errorPosition)}>
                 {errors.login && errors.login.message}
               </span>
               <label className={s.label}>Логин</label>
@@ -44,7 +53,7 @@ export const Auth = () => {
               />
             </div>
             <div className={s.inputWrapper}>
-              <span className={s.error}>
+              <span className={classNames(s.error, s.errorPosition)}>
                 {errors.password && errors.password.message}
               </span>
               <label className={s.label}>Пароль</label>
@@ -68,6 +77,7 @@ export const Auth = () => {
               Войти
             </button>
           </form>
+          {error && <p className={s.error}>{getMessageErrorRu(error)}</p>}
         </div>
       </div>
     </Container>
