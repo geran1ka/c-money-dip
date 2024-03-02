@@ -1,5 +1,23 @@
 .logo {
+  transition:
+    color 0.3s ease-in-out,
+    outline-color 0.3s ease-in-out,
+    border-color 0.3s ease-in-out;
+
   @media (max-width: 768px) {
     max-width: 100px;
+  }
+
+  &:focus {
+    outline-color: black;
+    border-color: white;
+  }
+
+  &:hover {
+    color: var(--pink);
+  }
+
+  &:active {
+    color: var(--text);
   }
 }

@@ -5,7 +5,6 @@ import { CurrencyItem } from "./CurrencyItem/CurrencyItem";
 import { Container } from "../Container/Container";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { getLocalStorage } from "../../const/localStorage";
 import { useEffect } from "react";
 
 export const CurrencyList = () => {
@@ -14,17 +13,11 @@ export const CurrencyList = () => {
   const { accessToken, loading } = useSelector((state) => state.auth);
   const navigate = useNavigate();
 
-  const accessToken2 = getLocalStorage("accessToken");
-
   useEffect(() => {
-    if (accessToken) return;
-
-    if (accessToken) {
-      console.log("accessTokenStorage", accessToken);
-    } else {
+    if (!accessToken) {
       navigate("/auth");
     }
-  }, [dispatch, accessToken]);
+  }, [accessToken]);
 
   return (
     <Container>
@@ -46,14 +39,11 @@ export const CurrencyList = () => {
           </div>
           <ul className={s.list}>
             {currencies.length > 0 ? (
-              currencies.map((currency) => {
-                console.log(currency);
-                return (
-                  <li className={s.card} key={currency.id}>
-                    <CurrencyItem props={currency} />
-                  </li>
-                );
-              })
+              currencies.map((currency) => (
+                <li className={s.card} key={currency.id}>
+                  <CurrencyItem props={currency} />
+                </li>
+              ))
             ) : (
               <div>
                 <h2>У Вас нет открытх счетов</h2>

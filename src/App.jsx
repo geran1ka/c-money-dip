@@ -9,26 +9,13 @@ import { Header } from "./components/Header/Header";
 import { Auth } from "./components/Auth/Auth";
 import { Check } from "./components/Check/Check";
 import { Exchange } from "./components/Exchange/Exchange";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { getLocalStorage } from "./const/localStorage";
 import { NotFound } from "./components/NotFound/NotFound";
+import { useSelector } from "react-redux";
 
 const App = () => {
   console.log();
-  const dispatch = useDispatch();
-  const { accessToken, loading } = useSelector((state) => state.auth);
+  const { accessToken } = useSelector((state) => state.auth);
   console.log("accessToken: ", accessToken);
-
-  const accessToken2 = getLocalStorage("accessToken");
-  console.log("accessToken2: ", accessToken2);
-
-  useEffect(() => {
-    if (accessToken) return;
-
-    if (accessToken) {
-    }
-  }, [dispatch, accessToken]);
 
   const router = createBrowserRouter([
     {
