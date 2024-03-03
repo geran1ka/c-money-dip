@@ -5,7 +5,10 @@ import { Container } from "../Container/Container";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import { fetchAccounts } from "../../store/accounts/accounts.slice";
+import {
+  fetchAccounts,
+  fetchCreateAccount,
+} from "../../store/accounts/accounts.slice";
 // import { accounts } from "../../data/accounts";
 
 export const AccountsList = () => {
@@ -25,11 +28,17 @@ export const AccountsList = () => {
     }
   }, [dispatch, accessToken, navigate]);
 
+  const handlerOpenNewAccount = () => {
+    dispatch(fetchCreateAccount(accessToken));
+  };
+
   return (
     <Container>
       <div className={s.container}>
         <h2 className={s.title}>Здравствуйте, Александр!</h2>
-        <button className={classNames(s.button, "button")}>
+        <button
+          className={classNames(s.button, "button")}
+          onClick={handlerOpenNewAccount}>
           Открыть новый счет
         </button>
         <div className={s.currencies}>
