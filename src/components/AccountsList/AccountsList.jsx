@@ -1,14 +1,14 @@
 import classNames from "classnames";
-import s from "./CurrencyList.module.scss";
-import { currencies } from "../../data/currencies";
-import { CurrencyItem } from "./CurrencyItem/CurrencyItem";
+import s from "./AccountsList.module.scss";
+import { AccountsItem } from "./AccountsItem/Accountstem";
 import { Container } from "../Container/Container";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { fetchAccounts } from "../../store/accounts/accounts.slice";
+// import { accounts } from "../../data/accounts";
 
-export const CurrencyList = () => {
+export const AccountsList = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { accessToken } = useSelector((state) => state.auth);
@@ -23,7 +23,7 @@ export const CurrencyList = () => {
     } else {
       dispatch(fetchAccounts(accessToken));
     }
-  }, [accessToken]);
+  }, [dispatch, accessToken, navigate]);
 
   return (
     <Container>
@@ -47,7 +47,7 @@ export const CurrencyList = () => {
             {accounts.length > 0 ? (
               accounts.map((account) => (
                 <li className={s.card} key={account.account}>
-                  <CurrencyItem props={account} />
+                  <AccountsItem props={account} />
                 </li>
               ))
             ) : (

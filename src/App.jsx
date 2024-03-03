@@ -3,7 +3,6 @@ import {
   RouterProvider,
   createBrowserRouter,
 } from "react-router-dom";
-import { CurrencyList } from "./components/CurrencyList/CurrencyList";
 import { Footer } from "./components/Footer/Footer";
 import { Header } from "./components/Header/Header";
 import { Auth } from "./components/Auth/Auth";
@@ -11,6 +10,7 @@ import { Check } from "./components/Check/Check";
 import { Exchange } from "./components/Exchange/Exchange";
 import { NotFound } from "./components/NotFound/NotFound";
 import { useSelector } from "react-redux";
+import { AccountsList } from "./components/AccountsList/AccountsList";
 
 const App = () => {
   console.log();
@@ -24,7 +24,7 @@ const App = () => {
         <>
           <Header />
           <main>
-            {accessToken ? <CurrencyList /> : <Navigate to="/auth" />}
+            {accessToken ? <AccountsList /> : <Navigate to="/auth" />}
           </main>
           <Footer />
         </>

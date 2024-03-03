@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import s from "./CurrencyItem.module.scss";
+import s from "./AccountsItem.module.scss";
 
-export const CurrencyItem = ({ props }) => {
+export const AccountsItem = ({ props }) => {
   const { account, balance, date, transactions } = props;
 
   return (
@@ -14,14 +14,14 @@ export const CurrencyItem = ({ props }) => {
           <p>
             {date
               ? new Date(date).toLocaleDateString()
-              : transactions[0].date
-                ? new Date(transactions[0].date).toLocaleDateString()
+              : transactions[0]?.date
+                ? new Date(transactions[0]?.date).toLocaleDateString()
                 : "Нет данных"}
           </p>
         </div>
         <div>
           <p>последняя операция</p>
-          {transactions.length > 0 ? (
+          {transactions?.length > 0 ? (
             <time dateTime={new Date(transactions[0].date).toISOString()}>
               {new Date(transactions[0].date).toLocaleDateString()}
             </time>
