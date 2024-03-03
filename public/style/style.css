@@ -121,6 +121,8 @@ iframe {
   border-radius: 10px;
   color: #fff;
 }
+
+
 .active {
   color: #c6b6d7;
   color: var(--text);

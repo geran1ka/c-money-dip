@@ -110,7 +110,11 @@ iframe {
   position: absolute;
   width: 1px;
 }
+
+
 .button {
+  position: relative;
+  display: inline-block;
   background: linear-gradient(
     87.4deg,
     #2e00b1 -11.74%,
@@ -119,8 +123,72 @@ iframe {
   );
   border: none;
   border-radius: 10px;
+  z-index: 2;
+  font-family: Nunito;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 25px;
   color: #fff;
+  transition: background 0.3s;
 }
+
+.button:disabled {
+  pointer-events: none;
+  background: gray;
+}
+
+.button:hover::before {
+  opacity: 1;
+}
+
+.button:focus::after {
+  opacity: 1;
+}
+
+.button:active::before,
+.button:active::after {
+  opacity: 0;
+}
+
+.button:active {
+  background: #2e00b1;
+}
+
+.button::before,
+.button::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.button::before {
+  background: linear-gradient(
+    88.2deg,
+    #a400be -14.85%,
+    #8100bd 50.2%,
+    #2e00b1 115.25%,
+    #2e00b1 115.25%
+  );
+}
+
+.button::after {
+  background: linear-gradient(
+    88.2deg,
+    #2e00b1 -14.85%,
+    #a400be 50.2%,
+    #2e00b1 115.25%,
+    #2e00b1 115.25%
+  );
+}
+
 .active {
   color: #c6b6d7;
   color: var(--text);

@@ -6,16 +6,22 @@ import { Container } from "../Container/Container";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { fetchAccounts } from "../../store/accounts/accounts.slice";
 
 export const CurrencyList = () => {
-  console.log();
   const dispatch = useDispatch();
-  const { accessToken, loading } = useSelector((state) => state.auth);
   const navigate = useNavigate();
+  const { accessToken } = useSelector((state) => state.auth);
+  const { accounts, loading, error } = useSelector((state) => state.accounts);
+  console.log("error: ", error);
+  console.log("loading: ", loading);
+  console.log("accounts: ", accounts);
 
   useEffect(() => {
     if (!accessToken) {
       navigate("/auth");
+    } else {
+      dispatch(fetchAccounts(accessToken));
     }
   }, [accessToken]);
 
@@ -38,10 +44,10 @@ export const CurrencyList = () => {
             </select>
           </div>
           <ul className={s.list}>
-            {currencies.length > 0 ? (
-              currencies.map((currency) => (
-                <li className={s.card} key={currency.id}>
-                  <CurrencyItem props={currency} />
+            {accounts.length > 0 ? (
+              accounts.map((account) => (
+                <li className={s.card} key={account.account}>
+                  <CurrencyItem props={account} />
                 </li>
               ))
             ) : (

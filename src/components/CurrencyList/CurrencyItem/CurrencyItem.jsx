@@ -2,22 +2,28 @@ import { Link } from "react-router-dom";
 import s from "./CurrencyItem.module.scss";
 
 export const CurrencyItem = ({ props }) => {
-  const { id, balance, openCurrensy, lastOperation } = props;
+  const { account, balance, date, transactions } = props;
 
   return (
-    <Link to={`/account/${id}`}>
-      <p className={s.id}>{id}</p>
+    <Link to={`/account/${account}`}>
+      <p className={s.id}>{account}</p>
       <p className={s.balance}>{balance.toLocaleString()}</p>
       <div className={s.info}>
         <div>
           <p>открыт</p>
-          <p>{new Date(openCurrensy).toLocaleDateString()}</p>
+          <p>
+            {date
+              ? new Date(date).toLocaleDateString()
+              : transactions[0].date
+                ? new Date(transactions[0].date).toLocaleDateString()
+                : "Нет данных"}
+          </p>
         </div>
         <div>
           <p>последняя операция</p>
-          {lastOperation ? (
-            <time dateTime={new Date(lastOperation).toISOString()}>
-              {new Date(lastOperation).toLocaleDateString()}
+          {transactions.length > 0 ? (
+            <time dateTime={new Date(transactions[0].date).toISOString()}>
+              {new Date(transactions[0].date).toLocaleDateString()}
             </time>
           ) : (
             <span>Транзакций не было</span>
