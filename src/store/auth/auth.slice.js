@@ -51,9 +51,9 @@ const authSlice = createSlice({
           localStorage.setItem("accessToken", action.payload.payload.token);
         }
         state.loading = false;
-        action.payload?.error
-          ? (state.error = action.payload.error)
-          : (state.error = null);
+        action.payload?.error ?
+          (state.error = action.payload.error) :
+          (state.error = null);
       })
       .addCase(fetchAccessToken.rejected, (state, action) => {
         state.loading = false;

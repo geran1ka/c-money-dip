@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { URL_API } from "../../const/const";
+import { sortArray } from "../../helper/sortArray";
 
 export const fetchAccounts = createAsyncThunk(
   "accounts/fetchAccounts",
@@ -66,12 +67,18 @@ const initialState = {
   accounts: [],
   loading: false,
   error: "",
+  sort: "account",
 };
 
 const accountsSlice = createSlice({
   name: "accounts",
   initialState,
-  reducers: {},
+  reducers: {
+    sortAccounts: (state, action) => {
+      state.sort = action.payload;
+      state.accounts = sortArray(state.accounts, action.payload);
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchAccounts.pending, (state) => {
@@ -104,3 +111,4 @@ const accountsSlice = createSlice({
 });
 
 export default accountsSlice.reducer;
+export const { sortAccounts } = accountsSlice.actions;
