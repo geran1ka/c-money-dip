@@ -4,6 +4,7 @@ import s from "./Exchange.module.scss";
 import { Course } from "./Course/Course";
 import { MyCurrency } from "./MyCurrency/MyCurrency";
 import { ChangeCurrency } from "./ChangeCurrency/ChangeCurrency";
+import { useLocation } from "react-router-dom";
 
 export const Exchange = () => {
   console.log();

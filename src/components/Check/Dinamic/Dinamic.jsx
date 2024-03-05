@@ -1,6 +1,9 @@
 import s from "./Dinamic.module.scss";
 
 export const Dinamic = () => {
+  const filterArrYear = (arr, year) =>
+    arr.filter((item) => new Date(item.date).getFullYear() === +year);
+
   console.log("Dinamic");
   return (
     <div className={s.dynamic}>

@@ -2,7 +2,8 @@ import classNames from "classnames";
 import s from "./Transaction.module.scss";
 
 export const Transaction = () => {
-  console.log();
+  // console.log("year: ", year);
+  // console.log("transaction: ", transaction);
 
   return (
     <div className={s.transaction}>
