@@ -6,7 +6,6 @@ import { Navigation } from "./Navigation/Navigation";
 
 export const Header = () => {
   const { accessToken } = useSelector((state) => state.auth);
-  console.log("accessToken: ", accessToken);
 
   return (
     <header className={s.header}>

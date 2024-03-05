@@ -16,18 +16,13 @@ export const AccountsList = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { accessToken } = useSelector((state) => state.auth);
-  const { accounts, loading, error, sort } = useSelector(
-    (state) => state.accounts,
-  );
-
-  console.log("accounts: ", accounts);
+  const { accounts, loading, error } = useSelector((state) => state.accounts);
 
   useEffect(() => {
     if (!accessToken) {
       navigate("/auth");
     } else {
       dispatch(fetchAccounts());
-      console.log("1");
     }
   }, [dispatch, accessToken, navigate]);
 

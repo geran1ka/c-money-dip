@@ -13,7 +13,6 @@ export const fetchAccounts = createAsyncThunk(
           Authorization: `Basic ${accessToken}`,
         },
       });
-      console.log("response: ", response);
 
       if (!response.ok) {
         throw new Error("Не удалось получить данные по счетам");
@@ -44,8 +43,6 @@ export const fetchCreateAccount = createAsyncThunk(
           Authorization: `Basic ${accessToken}`,
         },
       });
-
-      console.log("response: ", response);
 
       if (!response.ok) {
         throw new Error("Не удалось создать новый счет");

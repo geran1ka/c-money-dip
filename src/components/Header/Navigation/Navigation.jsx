@@ -7,18 +7,16 @@ import { useResize } from "../../../hooks/hooks";
 import { Link, useLocation } from "react-router-dom";
 
 export const Navigation = () => {
-  const dispatch = useDispatch();
-
   const [isShowMenu, setIsShowMenu] = useState(false);
-  console.log("isShowMenu: ", isShowMenu);
-
+  const dispatch = useDispatch();
   const isLaptop = useResize(540);
+  const navRef = useRef(null);
+  const path = useLocation().pathname;
 
   const logOut = () => {
     dispatch(removeToken());
   };
 
-  const navRef = useRef(null);
   const hadleClick = (e) => {
     const target = e.target;
     if (
@@ -29,7 +27,9 @@ export const Navigation = () => {
     }
   };
 
-  const path = useLocation().pathname;
+  const handleToggleMenu = () => {
+    setIsShowMenu(!isShowMenu);
+  };
 
   useEffect(() => {
     if (!isShowMenu) return;
@@ -49,24 +49,10 @@ export const Navigation = () => {
 
   return (
     <div>
-      {/* <div
-        ref={navRef}
-        className={classNames(s.menu, isShowMenu && s.change)}
-        onClick={(e) => {
-          console.log(e.target);
-          setIsShowMenu(!isShowMenu);
-        }}>
-        <div className={s.line1}></div>
-        <div className={s.line2}></div>
-        <div className={s.line3}></div>
-      </div> */}
       <div
         ref={navRef}
         className={classNames(s.burger, isShowMenu && s.active)}
-        onClick={(e) => {
-          console.log(e.target);
-          setIsShowMenu(!isShowMenu);
-        }}>
+        onClick={handleToggleMenu}>
         <span className={s.line}></span>
       </div>
       <nav className={classNames(s.navigation, isShowMenu && s.show)}>
@@ -92,7 +78,11 @@ export const Navigation = () => {
               xmlns="http://www.w3.org/2000/svg"
               className={s.arrow}>
               <path
-                d="M5.5675 9.6925L6.625 10.75L10.375 7L6.625 3.25L5.5675 4.3075L7.5025 6.25H0.25V7.75H7.5025L5.5675 9.6925ZM12.25 0.25H1.75C0.9175 0.25 0.25 0.925 0.25 1.75V4.75H1.75V1.75H12.25V12.25H1.75V9.25H0.25V12.25C0.25 13.075 0.9175 13.75 1.75 13.75H12.25C13.075 13.75 13.75 13.075 13.75 12.25V1.75C13.75 0.925 13.075 0.25 12.25 0.25Z"
+                d="M5.5675 9.6925L6.625 10.75L10.375 7L6.625 3.25L5.5675 4.3075L7.5025
+                6.25H0.25V7.75H7.5025L5.5675 9.6925ZM12.25 0.25H1.75C0.9175 0.25 0.25
+                0.925 0.25 1.75V4.75H1.75V1.75H12.25V12.25H1.75V9.25H0.25V12.25C0.25
+                13.075 0.9175 13.75 1.75 13.75H12.25C13.075 13.75 13.75 13.075 13.75
+                12.25V1.75C13.75 0.925 13.075 0.25 12.25 0.25Z"
                 fill="currentColor"></path>
             </svg>
           </button>
@@ -102,6 +92,6 @@ export const Navigation = () => {
   );
 };
 
-<div class="header__burger burger">
-  <span class="burger__line"></span>
+<div className="header__burger burger">
+  <span className="burger__line"></span>
 </div>;

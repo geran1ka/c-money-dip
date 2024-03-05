@@ -13,9 +13,7 @@ import { useSelector } from "react-redux";
 import { AccountsList } from "./components/AccountsList/AccountsList";
 
 const App = () => {
-  console.log();
   const { accessToken } = useSelector((state) => state.auth);
-  console.log("accessToken: ", accessToken);
 
   const router = createBrowserRouter([
     {
