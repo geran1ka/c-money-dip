@@ -4,9 +4,9 @@ import { sortArray } from "../../helper/sortArray";
 
 export const fetchAccounts = createAsyncThunk(
   "accounts/fetchAccounts",
-  async (accessToken, { rejectWithValue }) => {
+  async (_, { getState, rejectWithValue }) => {
     try {
-      // const token = getState().auth.accessToken;
+      const accessToken = getState().auth.accessToken;
       const response = await fetch(`${URL_API}/accounts`, {
         method: "GET",
         headers: {
@@ -34,8 +34,10 @@ export const fetchAccounts = createAsyncThunk(
 
 export const fetchCreateAccount = createAsyncThunk(
   "createAccount/fetchCreateAccount",
-  async (accessToken, { rejectWithValue }) => {
+  async (_, { getState, rejectWithValue }) => {
     try {
+      const accessToken = getState().auth.accessToken;
+
       const response = await fetch(`${URL_API}/create-account`, {
         method: "POST",
         headers: {
@@ -50,7 +52,6 @@ export const fetchCreateAccount = createAsyncThunk(
       }
 
       const data = await response.json();
-      console.log("data: ", data);
 
       if (data.error) {
         throw new Error(data.error);
@@ -67,7 +68,7 @@ const initialState = {
   accounts: [],
   loading: false,
   error: "",
-  sort: "account",
+  sort: "",
 };
 
 const accountsSlice = createSlice({

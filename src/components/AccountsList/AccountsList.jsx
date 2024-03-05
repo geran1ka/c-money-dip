@@ -20,36 +20,26 @@ export const AccountsList = () => {
     (state) => state.accounts,
   );
 
+  console.log("accounts: ", accounts);
+
   useEffect(() => {
     if (!accessToken) {
       navigate("/auth");
     } else {
-      dispatch(fetchAccounts(accessToken));
+      dispatch(fetchAccounts());
       console.log("1");
     }
   }, [dispatch, accessToken, navigate]);
 
   const handlerOpenNewAccount = () => {
-    dispatch(fetchCreateAccount(accessToken));
+    dispatch(fetchCreateAccount());
   };
-
-  useEffect(() => {
-    if (sort) {
-      const idTimer = setTimeout(() => {
-        dispatch(sortAccounts(sort));
-      }, 100);
-
-      return () => {
-        clearTimeout(idTimer);
-      };
-    }
-  }, []);
 
   const handlerSortAccounts = (e) => {
     dispatch(sortAccounts(e.target.value));
   };
   // !ToDo добаить Preload
-  if (loading) return <div>Загрузка....</div>;
+  // if (loading) return <div>Загрузка....</div>;
 
   // !ToDo добаить Error
   if (error) return <div>Ошибка....</div>;
@@ -71,6 +61,12 @@ export const AccountsList = () => {
               className={s.select}
               onChange={handlerSortAccounts}
               name="sort">
+              <option
+                style={{ textAlign: "center" }}
+                id="default"
+                value="default">
+                -----
+              </option>
               <option id="account" value="account">
                 Номер счёта
               </option>
@@ -81,7 +77,7 @@ export const AccountsList = () => {
                 Дата открытия
               </option>
               <option id="last" value="last">
-                Дата последней трансзакции
+                Дата трансзакции
               </option>
             </select>
           </div>

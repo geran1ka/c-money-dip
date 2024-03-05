@@ -10,6 +10,7 @@ export const Navigation = () => {
   const dispatch = useDispatch();
 
   const [isShowMenu, setIsShowMenu] = useState(false);
+  console.log("isShowMenu: ", isShowMenu);
 
   const isLaptop = useResize(540);
 
@@ -31,6 +32,7 @@ export const Navigation = () => {
   const path = useLocation().pathname;
 
   useEffect(() => {
+    if (!isShowMenu) return;
     document.addEventListener("keydown", hadleClick);
     document.addEventListener("click", hadleClick);
     return () => {
@@ -47,15 +49,25 @@ export const Navigation = () => {
 
   return (
     <div>
-      <div
+      {/* <div
         ref={navRef}
         className={classNames(s.menu, isShowMenu && s.change)}
-        onClick={() => {
+        onClick={(e) => {
+          console.log(e.target);
           setIsShowMenu(!isShowMenu);
         }}>
         <div className={s.line1}></div>
         <div className={s.line2}></div>
         <div className={s.line3}></div>
+      </div> */}
+      <div
+        ref={navRef}
+        className={classNames(s.burger, isShowMenu && s.active)}
+        onClick={(e) => {
+          console.log(e.target);
+          setIsShowMenu(!isShowMenu);
+        }}>
+        <span className={s.line}></span>
       </div>
       <nav className={classNames(s.navigation, isShowMenu && s.show)}>
         <ul className={s.nav}>
@@ -89,3 +101,7 @@ export const Navigation = () => {
     </div>
   );
 };
+
+<div class="header__burger burger">
+  <span class="burger__line"></span>
+</div>;
