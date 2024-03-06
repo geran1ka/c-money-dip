@@ -29,7 +29,7 @@ export const Dinamic = ({ transactions }) => {
           onChange={handlerChangeYears}>
           {selectYears.length > 0 ? (
             selectYears.map((year, index) => (
-              <option key={randomId()} value={year}>
+              <option key={index} value={year}>
                 {year}
               </option>
             ))
