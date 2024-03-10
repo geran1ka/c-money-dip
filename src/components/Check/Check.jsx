@@ -8,6 +8,8 @@ import { Link, useLocation, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAccount } from "../../store/account/account.slice";
+import { Statistic } from "./Statistic/Statistic";
+import { Preloader } from "../Preloader/Preloader";
 
 export const Check = () => {
   console.log("Check");
@@ -20,15 +22,17 @@ export const Check = () => {
     error,
   } = useSelector((state) => state.account);
 
+  const acc2 = useSelector((state) => state.account);
+  console.log("acc2: ", acc2);
+
   useEffect(() => {
     dispatch(fetchAccount(accountId));
   }, [dispatch, accountId]);
-
   return (
     <Container>
       <div className={s.Account_container__bOskA}>
         {loading ? (
-          <div>Preloader</div>
+          <Preloader />
         ) : (
           <>
             <div className={s.Account_container__header__MABYz}>
@@ -49,8 +53,10 @@ export const Check = () => {
                 Вернуться
               </Link>
             </div>
-            <Dinamic transactions={transactions} />
-            <History transactions={transactions} />
+            {transactions?.length > 0 && (
+              <Dinamic transactions={transactions} />
+            )}
+            <History transactions={transactions} account={account} />
             <Transaction />
           </>
         )}

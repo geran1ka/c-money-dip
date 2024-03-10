@@ -30,6 +30,4 @@ export const data = {
   ],
 };
 
-export const Statistic = () => {
-  return <Doughnut data={data} />;
-};
+export const Statistic = () => <Doughnut data={data} />;

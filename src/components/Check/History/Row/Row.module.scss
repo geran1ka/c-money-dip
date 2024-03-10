@@ -1,0 +1,22 @@
+.td {
+  padding: 12px 0;
+
+  @media (max-width: 768px) {
+    max-width: 30%;
+    padding: 5px 0;
+  }
+}
+
+.middle {
+  border-left: 1px solid var(--bgcolor);
+  border-right: 1px solid var(--bgcolor);
+  padding-left: 20px;
+}
+
+.date {
+  padding-left: 12px;
+}
+
+.expenses {
+  color: var(--pink);
+}

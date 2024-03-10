@@ -8,7 +8,7 @@ import {
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 import { round } from "../../../../helper/round";
-import { randomId } from "../../../../helper/randomId";
+import { getPointsLine } from "../../../../helper/getPointsLine";
 
 ChartJS.register(
   CategoryScale,
@@ -31,10 +31,10 @@ const options = {
         weight: "700",
         size: 15,
       },
-      // callbacks: {
-      //   title: () => null,
-      //   label: (context) => context.formattedValue + " ₽",
-      // },
+      callbacks: {
+        title: () => null,
+        label: (context) => context.formattedValue + " ₽",
+      },
     },
   },
 };
@@ -48,63 +48,25 @@ const data = {
   ],
 };
 
-// export const LineChart = ({ transactions, year }) => {
-//   data.labels = [];
+export const LineChart = ({ balanceYear }) => {
+  const balance = Object.entries(balanceYear?.monthlyBalances).map(
+    ([key, value]) => ({
+      [key]: value,
+    }),
+  );
 
-//   const lastTransfers = [];
-
-//   for (let i = 0; i < 12; i++) {
-//     const lastTransferInMonth = transactions?
-//       .filter((tr) => new Date(tr.date).getFullYear() === year)
-//       .filter((tr) => new Date(tr.date).getMonth() === i);
-//       console.log("lastTransferInMonth: ", lastTransferInMonth);
-
-//     if (lastTransferInMonth !== undefined) {
-//       console.log("lastTransferInMonth: ", lastTransferInMonth);
-//       lastTransfers.push(lastTransferInMonth);
-//     }
-//   }
-
-//   data.datasets[0].data = lastTransfers.map((tr) => {
-//     return tr.map(item => {
-//       const date = item.date;
-//       const month = new Date(date).toLocaleString("default", { month: "short" });
-//       return { x: date, y: round(item.amount) };
-//     })
-
-//   });
-
-//   return <Line options={options} data={data} redraw />;
-// };
-
-export const LineChart = ({ transactions, year }) => {
-  console.log("transactions: ", transactions);
   data.labels = [];
 
-  const lastTransfers = [];
+  data.datasets[0].data = balance
+    .slice(balance.length - 6 < 0 ? 0 : balance.length - 6)
+    .map((item, index, arr) => {
+      const lengt = arr.length;
+      const key = Object.keys(item);
 
-  for (let i = 0; i < 12; i++) {
-    const lastTransferInMonth = transactions
-      .filter((tr) => new Date(tr.date).getFullYear() === year)
-      .filter((tr) => new Date(tr.date).getMonth() === i)
-      .at(-1);
-
-    if (lastTransferInMonth !== undefined) {
-      console.log("lastTransferInMonth: ", lastTransferInMonth);
-      lastTransfers.push(lastTransferInMonth);
-    }
-  }
-
-  data.datasets[0].data = lastTransfers.map((tr) => {
-    const date = tr.date;
-    const month = new Date(date).toLocaleString("default", { month: "short" });
-    console.log("month: ", month);
-    console.log("tr.amount", tr.amount);
-
-    return { x: month, y: round(tr.amount) };
-  });
-
-  console.log("data: ", data);
+      if (lengt - index <= 6) {
+        return { x: getPointsLine(key), y: round(item[key].balance) };
+      }
+    });
 
   return <Line options={options} data={data} redraw />;
 };
