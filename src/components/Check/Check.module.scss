@@ -1,16 +1,31 @@
 .container {
   display: grid;
-  grid-template-columns: minmax(300px, 400px);
+  grid-template-columns: minmax(300px, 500px);
   grid-template-rows: min-content repeat(3, min-content);
   grid-template-areas: "title" "dinamics" "history" "transactions";
-  padding-top: 65px;
+  padding-top: 45px;
   gap: 10px;
+
+  @media (min-width: 540px) {
+    justify-content: center;
+    padding-top: 65px;
+    gap: 15px;
+  }
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, minmax(300px, 580px));
+    grid-template-rows: min-content repeat(2, min-content);
+    grid-template-areas: "title title" "dinamics history" "transactions transactions";
+    justify-content: space-between;
+    gap: 20px;
+  }
 }
 .containerHeader {
   grid-area: title;
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 10px;
+  width: 100%;
 
   @media (min-width: 540px) {
     flex-direction: row;

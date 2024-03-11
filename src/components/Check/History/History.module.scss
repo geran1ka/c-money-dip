@@ -40,6 +40,14 @@
   scrollbar-width: thin;
   scrollbar-color: var(--text) var(--header);
   scroll-behavior: smooth;
+
+  @media (min-width: 540px) {
+    max-height: 320px;
+  }
+
+  @media (min-width: 768px) {
+    max-height: 475px;
+  }
 }
 
 .container::-webkit-scrollbar {
