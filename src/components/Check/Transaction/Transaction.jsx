@@ -2,9 +2,6 @@ import classNames from "classnames";
 import s from "./Transaction.module.scss";
 
 export const Transaction = () => (
-  // console.log("year: ", year);
-  // console.log("transaction: ", transaction);
-
   <div className={s.transaction}>
     <h3 className={classNames(s.title)}>Перевод</h3>
     <form className={s.form}>

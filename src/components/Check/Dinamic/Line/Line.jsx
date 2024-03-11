@@ -33,7 +33,10 @@ const options = {
       },
       callbacks: {
         title: () => null,
-        label: (context) => context.formattedValue + " ₽",
+        label: (context) => {
+          console.log("context", context);
+          return context.formattedValue + " ₽";
+        },
       },
     },
   },
@@ -43,6 +46,7 @@ const data = {
   labels: [],
   datasets: [
     {
+      label: "",
       borderColor: "#B865D6",
     },
   ],

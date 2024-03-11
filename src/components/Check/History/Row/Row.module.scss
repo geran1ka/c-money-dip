@@ -10,11 +10,28 @@
 .middle {
   border-left: 1px solid var(--bgcolor);
   border-right: 1px solid var(--bgcolor);
-  padding-left: 20px;
+  padding-left: 4px;
+  padding-right: 4px;
+
+  @media (min-width: 540px) {
+    padding-left: 8px;
+  }
+
+  @media (min-width: 768px) {
+    padding-left: 12px;
+  }
 }
 
 .date {
-  padding-left: 12px;
+  padding-left: 4px;
+
+  @media (min-width: 540px) {
+    padding-left: 8px;
+  }
+
+  @media (min-width: 768px) {
+    padding-left: 12px;
+  }
 }
 
 .expenses {

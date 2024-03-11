@@ -30,16 +30,14 @@ export const Check = () => {
   }, [dispatch, accountId]);
   return (
     <Container>
-      <div className={s.Account_container__bOskA}>
+      <div className={s.container}>
         {loading ? (
           <Preloader />
         ) : (
           <>
-            <div className={s.Account_container__header__MABYz}>
-              <h2 className={s.Account_title__oytHW}>Счет №{account}</h2>
-              <Link
-                className={classNames(s.Account_button__3jGkT, "button")}
-                to="/">
+            <div className={s.containerHeader}>
+              <h2 className={s.title}>Счет&nbsp;№{account}</h2>
+              <Link className={classNames(s.button, "button")} to="/">
                 <svg
                   width="16"
                   height="13"
