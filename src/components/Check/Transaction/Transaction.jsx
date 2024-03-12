@@ -3,10 +3,13 @@ import s from "./Transaction.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { fetchTransferAmount } from "../../../store/account/account.slice";
+import { randomId } from "../../../helper/randomId";
 
 export const Transaction = () => {
   const dispatch = useDispatch();
   const transactionError = useSelector((state) => state.account.error);
+  const { accounts } = useSelector((state) => state.accounts);
+  console.log("accounts: ", accounts);
 
   const {
     reset,
@@ -30,6 +33,7 @@ export const Transaction = () => {
           <label className={s.label}>Счет</label>
           <input
             className={s.input}
+            list="listSelect"
             {...register("to", {
               required: "Заполните это поле",
               pattern: {
@@ -38,6 +42,15 @@ export const Transaction = () => {
               },
             })}
           />
+          <datalist id="listSelect">
+            {accounts.map((item) => {
+              return (
+                <option key={randomId()} value={item.account}>
+                  {item.account}
+                </option>
+              );
+            })}
+          </datalist>
         </div>
         <div className={s.wrap}>
           <span className={s.error}>
