@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { URL_API } from "../../const/const";
+import axios from "axios";
 
 export const fetchAccount = createAsyncThunk(
   "account/fetchAccount",
@@ -35,19 +36,21 @@ export const fetchTransferAmount = createAsyncThunk(
   async (info, { getState, rejectWithValue }) => {
     try {
       const accessToken = getState().auth.accessToken;
-      const account = getState().account.account.account;
-      console.log("account: ", account);
+      const from = getState().account.account.account;
+      console.log("account: ", from);
       const { to, amount } = info;
 
-      if (!accessToken || !account) return;
+      if (!accessToken || !from) return;
 
       const response = await fetch(`${URL_API}/transfer-funds`, {
         method: "POST",
         headers: {
+          // eslint-disable-next-line quote-props
           Authorization: `Basic ${accessToken}`,
+          "Content-Type": "application/json;charset=utf-8",
         },
         body: JSON.stringify({
-          from: account,
+          from,
           to,
           amount,
         }),
@@ -55,11 +58,12 @@ export const fetchTransferAmount = createAsyncThunk(
 
       if (!response.ok) {
         throw new Error(
-          `Не удалось совершить перевод со счета: ${account} на счет ${to}`,
+          `Не удалось совершить перевод со счета: ${from} на счет ${to}`,
         );
       }
 
       const data = await response.json();
+      console.log("data: ", data);
 
       if (data.error) {
         throw new Error(data.error);
@@ -69,6 +73,40 @@ export const fetchTransferAmount = createAsyncThunk(
     } catch (error) {
       return rejectWithValue(error);
     }
+  },
+);
+
+export const fetchTransferAmount1 = createAsyncThunk(
+  "account/send",
+  (transactionInfo, { getState }) => {
+    console.log("transactionInfo: ", transactionInfo);
+    const token = getState().auth.accessToken;
+    const currentAccount = getState().account.account.account;
+
+    const { to, amount } = transactionInfo;
+
+    return axios
+      .post(
+        `${URL_API}/transfer-funds`,
+        {
+          from: currentAccount,
+          to,
+          amount,
+        },
+        {
+          headers: {
+            Authorization: `Basic ${token}`,
+          },
+        },
+      )
+      .then(({ data }) => {
+        console.log("data: ", data);
+        const account = data.payload;
+        const error = data.error;
+
+        return { account, error };
+      })
+      .catch((error) => Promise.reject(error));
   },
 );
 
@@ -112,7 +150,7 @@ const accountSlice = createSlice({
       .addCase(fetchTransferAmount.rejected, (state, action) => {
         console.log("action: ", action);
         state.loading = false;
-        state.error = action.payload;
+        state.error = action.payload.message;
       });
   },
 });

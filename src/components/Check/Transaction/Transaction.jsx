@@ -43,13 +43,11 @@ export const Transaction = () => {
             })}
           />
           <datalist id="listSelect">
-            {accounts.map((item) => {
-              return (
-                <option key={randomId()} value={item.account}>
-                  {item.account}
-                </option>
-              );
-            })}
+            {accounts.map((item) => (
+              <option key={randomId()} value={item.account}>
+                {item.account}
+              </option>
+            ))}
           </datalist>
         </div>
         <div className={s.wrap}>
@@ -68,8 +66,12 @@ export const Transaction = () => {
             })}
           />
         </div>
-        <button className={classNames(s.button, "button")}>Перевести</button>
-        {transactionError && <p className={s.error}>{transactionError}</p>}
+        <button type="submit" className={classNames(s.button, "button")}>
+          Перевести
+        </button>
+        {transactionError && (
+          <p className={s.errorSubmit}>{transactionError}</p>
+        )}
       </form>
     </div>
   );
