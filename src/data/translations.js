@@ -457,57 +457,44 @@ const transactions = [
   },
 ];
 
-// const result = {};
+const account = "74213041477477406320783754";
 
-// transactions.forEach((transaction) => {
-//   const date = new Date(transaction.date);
-//   const year = date.getFullYear();
-//   const month = date.toLocaleString("default", { month: "short" });
+const getBalancesYear = (data, account) => {
+  const balanceHistory = {};
 
-//   if (!result[year]) {
-//     result[year] = {};
-//   }
+  data.forEach((transaction) => {
+    const date = new Date(transaction.date.slice(0, -1));
+    const year = date.getFullYear();
+    const month = date.getMonth();
 
-//   if (!result[year][month]) {
-//     result[year][month] = {
-//       balance: 0,
-//       income: 0,
-//       expenses: 0,
-//     };
-//   }
+    if (!(year in balanceHistory)) {
+      balanceHistory[year] = { monthlyBalances: {} };
+    }
 
-//   result[year][month].balance += transaction.amount;
-//   if (transaction.amount > 0) {
-//     result[year][month].income += transaction.amount;
-//   } else {
-//     result[year][month].expenses -= transaction.amount;
-//   }
-// });
+    if (!balanceHistory[year].monthlyBalances[month]) {
+      balanceHistory[year].monthlyBalances[month] = {
+        balance: balanceHistory[year].monthlyBalances[month - 1]?.balance || 0,
+        income: 0,
+        expense: 0,
+      };
+      balanceHistory[year].monthlyBalances[month - 1] || 0;
+    }
 
-// console.log(result);
+    if (transaction.from === account) {
+      balanceHistory[year].monthlyBalances[month].balance -= transaction.amount;
 
-const result = {};
+      balanceHistory[year].monthlyBalances[month].expense += transaction.amount;
+    }
 
-transactions.forEach((transaction) => {
-  const month = new Date(transaction.date).toLocaleString("default", {
-    month: "short",
+    if (transaction.to === account) {
+      balanceHistory[year].monthlyBalances[month].balance += transaction.amount;
+
+      balanceHistory[year].monthlyBalances[month].income += transaction.amount;
+    }
   });
 
-  if (!result[month]) {
-    result[month] = {
-      totalBalance: 0,
-      totalIncome: 0,
-      totalExpenses: 0,
-    };
-  }
+  return balanceHistory;
+};
 
-  result[month].totalBalance += transaction.amount;
-
-  if (transaction.amount > 0) {
-    result[month].totalIncome += transaction.amount;
-  } else {
-    result[month].totalExpenses -= transaction.amount;
-  }
-});
-
-console.log(result);
+const res = getBalancesYear(transactions, account);
+console.log("res: ", res);

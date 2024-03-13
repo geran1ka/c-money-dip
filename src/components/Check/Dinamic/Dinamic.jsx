@@ -6,7 +6,6 @@ import { useSelector } from "react-redux";
 import { getBalancesYear } from "../../../helper/getBalancesYeat";
 
 export const Dinamic = ({ transactions }) => {
-  console.log("transactions: ", transactions);
   const { account } = useSelector((state) => state.account.account);
 
   const selectYears = [

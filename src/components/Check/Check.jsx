@@ -4,7 +4,7 @@ import { Container } from "../Container/Container";
 import { Transaction } from "./Transaction/Transaction";
 import { History } from "./History/History";
 import { Dinamic } from "./Dinamic/Dinamic";
-import { Link, useLocation, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAccount } from "../../store/account/account.slice";
@@ -12,7 +12,6 @@ import { Statistic } from "./Statistic/Statistic";
 import { Preloader } from "../Preloader/Preloader";
 
 export const Check = () => {
-  console.log("Check");
   const dispatch = useDispatch();
 
   const accountId = useParams().id;
@@ -21,9 +20,6 @@ export const Check = () => {
     loading,
     error,
   } = useSelector((state) => state.account);
-
-  const acc2 = useSelector((state) => state.account);
-  console.log("acc2: ", acc2);
 
   useEffect(() => {
     dispatch(fetchAccount(accountId));

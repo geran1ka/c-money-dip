@@ -34,7 +34,6 @@ const options = {
       callbacks: {
         title: () => null,
         label: (context) => {
-          console.log("context", context);
           return context.formattedValue + " ₽";
         },
       },
@@ -53,21 +52,18 @@ const data = {
 };
 
 export const LineChart = ({ balanceYear }) => {
-  const balance = Object.entries(balanceYear?.monthlyBalances).map(
-    ([key, value]) => ({
-      [key]: value,
-    }),
-  );
+  const balance = Object.entries(balanceYear?.month).map(([key, value]) => ({
+    [key]: value,
+  }));
 
   data.labels = [];
 
   data.datasets[0].data = balance
     .slice(balance.length - 6 < 0 ? 0 : balance.length - 6)
     .map((item, index, arr) => {
-      const lengt = arr.length;
+      const length = arr.length;
       const key = Object.keys(item);
-
-      if (lengt - index <= 6) {
+      if (length - index <= 6) {
         return { x: getPointsLine(key), y: round(item[key].balance) };
       }
     });

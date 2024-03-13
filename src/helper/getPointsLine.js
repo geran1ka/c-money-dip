@@ -13,6 +13,5 @@ export const getPointsLine = (key) => {
     "нояб",
     "декбр",
   ];
-
   return monthArr[key];
 };
