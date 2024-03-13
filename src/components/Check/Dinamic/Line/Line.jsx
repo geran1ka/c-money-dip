@@ -33,9 +33,7 @@ const options = {
       },
       callbacks: {
         title: () => null,
-        label: (context) => {
-          return context.formattedValue + " ₽";
-        },
+        label: (context) => context.formattedValue + " ₽",
       },
     },
   },

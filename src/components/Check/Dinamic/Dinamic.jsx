@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import s from "./Dinamic.module.scss";
 import { LineChart } from "./Line/Line";
 import { randomId } from "../../../helper/randomId";
@@ -13,7 +13,12 @@ export const Dinamic = ({ transactions }) => {
   ];
 
   const [dinamicsByYear, setDinamicsByYear] = useState(selectYears[0]);
-  const balancesByYearObj = getBalancesYear(transactions, account);
+  const balancesByYearObj = useMemo(
+    () => getBalancesYear(transactions, account),
+    [account],
+  );
+
+  console.log("balancesByYearObj: ", balancesByYearObj);
 
   const handlerChangeYears = (e) => {
     setDinamicsByYear(+e.target.value);

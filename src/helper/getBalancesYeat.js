@@ -11,7 +11,19 @@ export const getBalancesYear = (data, account) => {
     }
 
     if (!balance[year].month[month]) {
-      balance[year].month[month] = { balance: res || 0 };
+      balance[year].month[month] = {
+        balance: res || 0,
+        income: 0,
+        expense: 0,
+      };
+    }
+
+    if (item.from === account) {
+      balance[year].month[month].expense += item.amount;
+    }
+
+    if (item.to === account) {
+      balance[year].month[month].income += item.amount;
     }
 
     return res;

@@ -9,6 +9,11 @@
   max-height: 330px;
 
   @media (min-width: 768px) {
+    margin-top: 60px;
+    height: min-content;
+  }
+
+  @media (min-width: 1040px) {
     margin-top: 67px;
     height: min-content;
   }

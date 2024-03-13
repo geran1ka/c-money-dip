@@ -52,6 +52,44 @@ export const Check = () => {
             )}
             <History transactions={transactions} account={account} />
             <Transaction />
+            <div className={s.statistic}>
+              <h2>Статистика</h2>
+              <div className={s.content}>
+                <div className={s.leftBlock}>
+                  <button className={s.buttonS} type="button">
+                    Неделя
+                  </button>
+                  <button className={s.buttonS} type="button">
+                    Месяц
+                  </button>
+                  <button className={s.buttonS} type="button">
+                    Год
+                  </button>
+                </div>
+                <div className={s.centerBlock}>
+                  {transactions?.length > 0 && (
+                    <Statistic transactions={transactions} />
+                  )}
+                </div>
+                <div className={s.rightBlock}>
+                  <div className={s.rigthWrap}>
+                    <span className={classNames(s.circle, s.trasparent)}></span>
+                    <span className={s.subtitle}>Баланс</span>
+                    <span className={s.amount}>530080 Р</span>
+                  </div>
+                  <div className={s.rigthWrap}>
+                    <span className={classNames(s.circle, s.violet)}></span>
+                    <span className={s.subtitle}>Доходы</span>
+                    <span className={s.amount}>530080 Р</span>
+                  </div>
+                  <div className={s.rigthWrap}>
+                    <span className={classNames(s.circle, s.pink)}></span>
+                    <span className={s.subtitle}>Расходы</span>
+                    <span className={s.amount}>530080 Р</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </>
         )}
       </div>

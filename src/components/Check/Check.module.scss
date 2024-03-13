@@ -13,8 +13,7 @@
   }
 
   @media (min-width: 768px) {
-    // grid-template-columns: repeat(2, minmax(300px, 580px));
-    grid-template-columns: minmax(min-content, 2fr) 1fr;
+    grid-template-columns: minmax(400px, 580px) minmax(280px, 360px);
     grid-template-rows: min-content repeat(2, min-content);
     grid-template-areas: "title title" "dinamics transactions" "history transactions";
     justify-content: space-between;
@@ -85,4 +84,70 @@
     font-size: 18px;
     padding: 12px 30px;
   }
+}
+
+.statistic {
+  max-width: 580px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 12px;
+}
+
+.leftBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  justify-content: center;
+}
+
+.buttonS {
+  background-color: transparent;
+  color: var(--white);
+  outline: none;
+  border: none;
+  text-align: left;
+}
+
+.rightBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  justify-content: center;
+}
+
+.rigthWrap {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.circle {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+}
+
+.trasparent {
+  background-color: transparent;
+}
+
+.pink {
+  background-color: #b865d6;
+}
+
+.violet {
+  background-color: #4b00ca;
+}
+
+.subtitle {
+  justify-self: flex-start;
+}
+
+.amount {
 }
