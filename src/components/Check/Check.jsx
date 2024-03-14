@@ -4,26 +4,37 @@ import { Container } from "../Container/Container";
 import { Transaction } from "./Transaction/Transaction";
 import { History } from "./History/History";
 import { Dinamic } from "./Dinamic/Dinamic";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAccount } from "../../store/account/account.slice";
 import { Statistic } from "./Statistic/Statistic";
 import { Preloader } from "../Preloader/Preloader";
+import { Error } from "../UI/Error/Error";
 
 export const Check = () => {
   const dispatch = useDispatch();
-
   const accountId = useParams().id;
+  const accessToken = useSelector((state) => state.auth.accessToken);
   const {
-    account: { account, balance, transactions },
+    account: { account, transactions },
     loading,
     error,
   } = useSelector((state) => state.account);
 
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!accessToken) {
+      navigate("/auth");
+    }
+  }, [accessToken, navigate]);
+
   useEffect(() => {
     dispatch(fetchAccount(accountId));
   }, [dispatch, accountId]);
+
+  if (error) return <Error error={error} />;
+
   return (
     <Container>
       <div className={s.container}>
@@ -52,44 +63,7 @@ export const Check = () => {
             )}
             <History transactions={transactions} account={account} />
             <Transaction />
-            <div className={s.statistic}>
-              <h2>Статистика</h2>
-              <div className={s.content}>
-                <div className={s.leftBlock}>
-                  <button className={s.buttonS} type="button">
-                    Неделя
-                  </button>
-                  <button className={s.buttonS} type="button">
-                    Месяц
-                  </button>
-                  <button className={s.buttonS} type="button">
-                    Год
-                  </button>
-                </div>
-                <div className={s.centerBlock}>
-                  {transactions?.length > 0 && (
-                    <Statistic transactions={transactions} />
-                  )}
-                </div>
-                <div className={s.rightBlock}>
-                  <div className={s.rigthWrap}>
-                    <span className={classNames(s.circle, s.trasparent)}></span>
-                    <span className={s.subtitle}>Баланс</span>
-                    <span className={s.amount}>530080 Р</span>
-                  </div>
-                  <div className={s.rigthWrap}>
-                    <span className={classNames(s.circle, s.violet)}></span>
-                    <span className={s.subtitle}>Доходы</span>
-                    <span className={s.amount}>530080 Р</span>
-                  </div>
-                  <div className={s.rigthWrap}>
-                    <span className={classNames(s.circle, s.pink)}></span>
-                    <span className={s.subtitle}>Расходы</span>
-                    <span className={s.amount}>530080 Р</span>
-                  </div>
-                </div>
-              </div>
-            </div>
+            {/* <Statistic transactions={transactions} balance={balance} /> */}
           </>
         )}
       </div>

@@ -10,6 +10,8 @@ import {
   fetchCreateAccount,
   sortAccounts,
 } from "../../store/accounts/accounts.slice";
+import { Error } from "../UI/Error/Error";
+import { Preloader } from "../Preloader/Preloader";
 // import { accounts } from "../../data/accounts";
 
 export const AccountsList = () => {
@@ -17,7 +19,6 @@ export const AccountsList = () => {
   const navigate = useNavigate();
   const { accessToken } = useSelector((state) => state.auth);
   const { accounts, loading, error } = useSelector((state) => state.accounts);
-
   useEffect(() => {
     if (!accessToken) {
       navigate("/auth");
@@ -37,7 +38,7 @@ export const AccountsList = () => {
   // if (loading) return <div>Загрузка....</div>;
 
   // !ToDo добаить Error
-  if (error) return <div>Ошибка....</div>;
+  if (error) return <Error error={error} />;
 
   return (
     <Container>
@@ -48,48 +49,52 @@ export const AccountsList = () => {
           onClick={handlerOpenNewAccount}>
           Открыть новый счет
         </button>
-        <div className={s.currencies}>
-          <h3 className={s.currenciesTitle}>Мои счета</h3>
-          <div className={s.sort}>
-            <span className={s.sortTitle}>Сортировка:</span>
-            <select
-              className={s.select}
-              onChange={handlerSortAccounts}
-              name="sort">
-              <option
-                style={{ textAlign: "center" }}
-                id="default"
-                value="default">
-                -----
-              </option>
-              <option id="account" value="account">
-                Номер счёта
-              </option>
-              <option id="balance" value="balance">
-                Баланс
-              </option>
-              <option id="date" value="date">
-                Дата открытия
-              </option>
-              <option id="last" value="last">
-                Дата трансзакции
-              </option>
-            </select>
+        {loading ? (
+          <Preloader />
+        ) : (
+          <div className={s.currencies}>
+            <h3 className={s.currenciesTitle}>Мои счета</h3>
+            <div className={s.sort}>
+              <span className={s.sortTitle}>Сортировка:</span>
+              <select
+                className={s.select}
+                onChange={handlerSortAccounts}
+                name="sort">
+                <option
+                  style={{ textAlign: "center" }}
+                  id="default"
+                  value="default">
+                  -----
+                </option>
+                <option id="account" value="account">
+                  Номер счёта
+                </option>
+                <option id="balance" value="balance">
+                  Баланс
+                </option>
+                <option id="date" value="date">
+                  Дата открытия
+                </option>
+                <option id="last" value="last">
+                  Дата трансзакции
+                </option>
+              </select>
+            </div>
+            <ul className={s.list}>
+              {accounts.length > 0 ? (
+                accounts.map((account) => (
+                  <li className={s.card} key={account.account}>
+                    <AccountsItem props={account} />
+                  </li>
+                ))
+              ) : (
+                <div>
+                  <h2>У Вас нет открытх счетов</h2>
+                </div>
+              )}
+            </ul>
           </div>
-          <ul className={s.list}>
-            {accounts.length > 0 ? (
-              accounts.map((account) => (
-                <li className={s.card} key={account.account}>
-                  <AccountsItem props={account} />
-                </li>
-              ))
-            ) : (
-              <div>
-                <h2>У Вас нет открытх счетов</h2>
-              </div>
-            )}
-          </ul>
-        </div>
+        )}
       </div>
     </Container>
   );

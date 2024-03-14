@@ -9,7 +9,6 @@ import { getMessageErrorRu } from "../../../helper/getMessageErrorRu";
 export const Transaction = () => {
   const dispatch = useDispatch();
   const transactionError = useSelector((state) => state.account.error);
-
   const { accounts } = useSelector((state) => state.accounts);
 
   const {

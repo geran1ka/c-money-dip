@@ -18,8 +18,6 @@ export const Dinamic = ({ transactions }) => {
     [account],
   );
 
-  console.log("balancesByYearObj: ", balancesByYearObj);
-
   const handlerChangeYears = (e) => {
     setDinamicsByYear(+e.target.value);
   };

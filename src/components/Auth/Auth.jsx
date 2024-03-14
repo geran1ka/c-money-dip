@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchAccessToken } from "../../store/auth/auth.slice";
 import { useEffect } from "react";
 import { getMessageErrorRu } from "../../helper/getMessageErrorRu";
+import { Error } from "../UI/Error/Error";
 
 export const Auth = () => {
   const dispatch = useDispatch();
@@ -78,6 +79,7 @@ export const Auth = () => {
             </button>
           </form>
           {error && <p className={s.error}>{getMessageErrorRu(error)}</p>}
+          {/* {error && <Error className={s.error} error={error} />} */}
         </div>
       </div>
     </Container>

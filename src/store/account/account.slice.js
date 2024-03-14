@@ -94,7 +94,7 @@ const accountSlice = createSlice({
       })
       .addCase(fetchAccount.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload;
+        state.error = action.payload.message;
       })
       .addCase(fetchTransferAmount.pending, (state) => {
         // state.loading = true;
