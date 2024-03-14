@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import { randomId } from "../../../helper/randomId";
 import { useForm } from "react-hook-form";
 import { fetchAllCurreency } from "../../../store/allCurrency/allCurrency.slice";
+import { fetchCurrencyBy } from "../../../store/myCurrency/myCurrency.slice";
+import { Error, Error2 } from "../../UI/Error/Error";
 
 export const ChangeCurrency = () => {
   const accessToken = useSelector((state) => state.auth.accessToken);
@@ -12,6 +14,9 @@ export const ChangeCurrency = () => {
   const { allCurrency, loading, error } = useSelector(
     (state) => state.allCurrency,
   );
+
+  const { error: errorBy } = useSelector((state) => state.myCurrency);
+  console.log("errorBy: ", errorBy);
 
   const [currency, setCurrency] = useState({
     to: "",
@@ -49,8 +54,9 @@ export const ChangeCurrency = () => {
   };
 
   const onSubmit = (data) => {
+    console.log("data: ", data);
     console.log(data);
-    // dispatch(currenciesBuyAsync(data));
+    dispatch(fetchCurrencyBy(data));
     reset();
   };
 
@@ -113,6 +119,7 @@ export const ChangeCurrency = () => {
           Обменять
         </button>
       </form>
+      {errorBy && <Error2 error={errorBy} />}
     </div>
   );
 };

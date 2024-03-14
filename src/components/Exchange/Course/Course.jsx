@@ -1,21 +1,40 @@
+import useWebSocket from "react-use-websocket";
 import { rates } from "../../../data/rates";
 import s from "./Course.module.scss";
+import { useState } from "react";
+import { WS_URL_API } from "../../../const/const";
 
 export const Course = () => {
   console.log();
+  const [changes, setChanges] = useState([]);
+  useWebSocket(`${WS_URL_API}/currency-feed`, {
+    onMessage: (messageEvent) => {
+      const message = JSON.parse(messageEvent.data);
+      if (message.type !== "EXCHANGE_RATE_CHANGE" || !message.change) return;
+      if (changes.length > 6) {
+        changes.shift();
+      }
+      setChanges((changes) => [...changes, message]);
+    },
+    shouldReconnect: () => true,
+  });
+
+  console.log(changes);
 
   return (
     <div className={s.wrapper}>
       <h3 className={s.title}>Изменение курса в режиме реального времени</h3>
       <div className={s.tbody}>
-        {rates.length &&
-          rates.map((rate, index) => (
+        {changes.length &&
+          changes.map((change, index) => (
             <div className={s.row} key={index}>
-              <span className={s.cellFirst}>{rate.rate}</span>
-              <span className={s.cellSecond}></span>
+              <span className={s.cellFirst}>
+                {change.from}/{change.to}
+              </span>
+              <span className={s.cellSecond}>{change.rate}</span>
               <span className={s.cellThird}>
-                {rate.currency}
-                {rate.exchangeRates === "up" && (
+                {change.currency}
+                {change.change === 1 && (
                   <svg
                     width="9"
                     height="7"
@@ -27,7 +46,7 @@ export const Course = () => {
                       fill="#0EFF0A"></path>
                   </svg>
                 )}
-                {rate.exchangeRates === "down" && (
+                {change.change === -1 && (
                   <svg
                     width="9"
                     height="7"

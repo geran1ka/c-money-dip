@@ -1,4 +1,5 @@
 export const getMessageErrorRu = (error) => {
+  console.log("error: ", error);
   let messageErrorRu = "";
 
   switch (error) {
@@ -26,12 +27,16 @@ export const getMessageErrorRu = (error) => {
         "Не указан счёт зачисления, или этого счёта не существует!";
       break;
     case "Invalid amount":
-      messageErrorRu =
-        "Не указана окончательный перевод, или она отрицательная!";
+      messageErrorRu = "Не указана сумма перевода!";
       break;
     case "Overdraft prevented":
-      messageErrorRu =
-        "У Вас недостаточно средств, для выполнения перевода указанной суммы!";
+      messageErrorRu = "Недостаточно средств на счёте списания!";
+      break;
+    case "Unknown currency code":
+      messageErrorRu = "Неверный валютный код!";
+      break;
+    case "Not enough currency":
+      messageErrorRu = "На валютном счёте списания нет средств!";
       break;
     default:
       messageErrorRu = "Что-то пошло не так!";

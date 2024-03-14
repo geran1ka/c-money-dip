@@ -74,7 +74,7 @@ export const fetchTransferAmount = createAsyncThunk(
 const initialState = {
   account: {},
   loading: false,
-  error: null,
+  error: "",
 };
 
 const accountSlice = createSlice({

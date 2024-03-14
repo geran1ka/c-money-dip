@@ -32,14 +32,12 @@ export const MyCurrency = () => {
         </thead>
         <tbody>
           {myCurrencyArr.length &&
-            myCurrencyArr.map((item) => {
-              return (
-                <tr key={item.code}>
-                  <td className={s.code}>{item.code}</td>
-                  <td className={s.amount}>{item.amount.toLocaleString()}</td>
-                </tr>
-              );
-            })}
+            myCurrencyArr.map((item) => (
+              <tr key={item.code}>
+                <td className={s.code}>{item.code}</td>
+                <td className={s.amount}>{item.amount.toLocaleString()}</td>
+              </tr>
+            ))}
         </tbody>
       </table>
     </div>

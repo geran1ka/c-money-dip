@@ -33,7 +33,7 @@ export const Check = () => {
     dispatch(fetchAccount(accountId));
   }, [dispatch, accountId]);
 
-  if (error) return <Error error={error} />;
+  // if (error) return <Error error={error} />;
 
   return (
     <Container>

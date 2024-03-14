@@ -16,3 +16,17 @@ export const Error = ({ error, className = "" }) => {
     </Container>
   );
 };
+
+export const Error2 = ({ error, className = "" }) => {
+  console.log("error: ", error);
+  const isRussianLanguage = /[а-я, А-Я]/g.test(error);
+  console.log("isRussianLanguage: ", isRussianLanguage);
+
+  return (
+    <div className={s.container2}>
+      <h2 className={classNames(s.error, className && className)}>
+        {isRussianLanguage ? error : getMessageErrorRu(error)}
+      </h2>
+    </div>
+  );
+};
