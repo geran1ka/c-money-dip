@@ -1,8 +1,24 @@
+import { useDispatch, useSelector } from "react-redux";
 import { myCurrencies } from "../../../data/myCurrencies";
 import s from "./MyCurrency.module.scss";
+import { useEffect } from "react";
+import { fetchMyCurrency } from "../../../store/myCurrency/myCurrency.slice";
+import { getArrayIsObject } from "../../../helper/getArrayIsObject";
 
 export const MyCurrency = () => {
-  console.log();
+  const dispatch = useDispatch();
+  const accessToken = useSelector((state) => state.auth.accessToken);
+  const { myCurrency, loadingMy, errorMy } = useSelector(
+    (state) => state.myCurrency,
+  );
+
+  const myCurrencyArr = getArrayIsObject(myCurrency, "values");
+
+  useEffect(() => {
+    if (accessToken) {
+      dispatch(fetchMyCurrency());
+    }
+  }, [dispatch, accessToken]);
 
   return (
     <div>
@@ -15,15 +31,15 @@ export const MyCurrency = () => {
           </tr>
         </thead>
         <tbody>
-          {myCurrencies.length &&
-            myCurrencies.map((myCurency) => (
-              <tr key={myCurency.code}>
-                <td className={s.code}>{myCurency.code}</td>
-                <td className={s.amount}>
-                  {myCurency.amount.toLocaleString()}
-                </td>
-              </tr>
-            ))}
+          {myCurrencyArr.length &&
+            myCurrencyArr.map((item) => {
+              return (
+                <tr key={item.code}>
+                  <td className={s.code}>{item.code}</td>
+                  <td className={s.amount}>{item.amount.toLocaleString()}</td>
+                </tr>
+              );
+            })}
         </tbody>
       </table>
     </div>

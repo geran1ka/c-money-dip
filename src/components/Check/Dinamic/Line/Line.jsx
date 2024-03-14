@@ -9,6 +9,7 @@ import {
 import { Line } from "react-chartjs-2";
 import { round } from "../../../../helper/round";
 import { getPointsLine } from "../../../../helper/getPointsLine";
+import { getArrayIsObject } from "../../../../helper/getArrayIsObject";
 
 ChartJS.register(
   CategoryScale,
@@ -53,10 +54,11 @@ const data = {
 };
 
 export const LineChart = ({ balanceYear }) => {
-  const balance = Object.entries(balanceYear?.month).map(([key, value]) => ({
-    [key]: value,
-  }));
+  // const balance = Object.entries(balanceYear?.month).map(([key, value]) => ({
+  //   [key]: value,
+  // }));
 
+  const balance = getArrayIsObject(balanceYear?.month);
   data.labels = [];
 
   data.datasets[0].data = balance
