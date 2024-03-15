@@ -22,15 +22,15 @@ export const MyCurrency = () => {
 
   return (
     <div>
-      <table>
-        <thead>
+      <table className={s.table}>
+        <thead className={s.thead}>
           <tr>
             <th className={s.title} colSpan="2">
               Мои валюты
             </th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className={s.tbody}>
           {myCurrencyArr.length &&
             myCurrencyArr.map((item) => (
               <tr key={item.code}>

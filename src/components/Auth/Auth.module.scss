@@ -1,4 +1,5 @@
 .container {
+  position: relative;
   display: flex;
   justify-content: center;
   padding-top: 40px;
@@ -128,6 +129,8 @@
 }
 
 .error {
+  position: absolute;
+  bottom: 15px;
   color: red;
   font-size: 12px;
 

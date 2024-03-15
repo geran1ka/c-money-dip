@@ -66,6 +66,7 @@ const initialState = {
   loading: false,
   error: "",
   sort: "",
+  errorCreateAccount: "",
 };
 
 const accountsSlice = createSlice({
@@ -81,7 +82,7 @@ const accountsSlice = createSlice({
     builder
       .addCase(fetchAccounts.pending, (state) => {
         state.loading = true;
-        state.error = null;
+        state.error = "";
       })
       .addCase(fetchAccounts.fulfilled, (state, action) => {
         state.accounts = action.payload.payload;
@@ -93,17 +94,19 @@ const accountsSlice = createSlice({
         state.error = action.payload.message;
       })
       .addCase(fetchCreateAccount.pending, (state) => {
-        state.loading = true;
-        state.error = null;
+        // state.loading = true;
+        state.errorCreateAccount = "";
       })
       .addCase(fetchCreateAccount.fulfilled, (state, action) => {
+        console.log("action: ", action);
         state.accounts = [...state.accounts, action.payload.payload];
         state.loading = false;
-        state.error = "";
+        state.errorCreateAccount = "";
       })
       .addCase(fetchCreateAccount.rejected, (state, action) => {
+        console.log("action: ", action);
         state.loading = false;
-        state.error = action.payload.message;
+        state.errorCreateAccount = action.payload.message;
       });
   },
 });

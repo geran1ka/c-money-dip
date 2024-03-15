@@ -54,10 +54,6 @@ const data = {
 };
 
 export const LineChart = ({ balanceYear }) => {
-  // const balance = Object.entries(balanceYear?.month).map(([key, value]) => ({
-  //   [key]: value,
-  // }));
-
   const balance = getArrayIsObject(balanceYear?.month);
   data.labels = [];
 

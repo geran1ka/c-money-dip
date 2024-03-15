@@ -4,11 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { fetchTransferAmount } from "../../../store/account/account.slice";
 import { randomId } from "../../../helper/randomId";
-import { getMessageErrorRu } from "../../../helper/getMessageErrorRu";
+import { ErrorMini } from "../../UI/Error/Error";
 
 export const Transaction = () => {
   const dispatch = useDispatch();
-  const transactionError = useSelector((state) => state.account.error);
+  const errorTransferAmount = useSelector(
+    (state) => state.account.errorTransferAmount,
+  );
   const { accounts } = useSelector((state) => state.accounts);
 
   const {
@@ -68,8 +70,11 @@ export const Transaction = () => {
         <button type="submit" className={classNames(s.button, "button")}>
           Перевести
         </button>
-        {transactionError && (
+        {/* {transactionError && (
           <p className={s.errorSubmit}>{getMessageErrorRu(transactionError)}</p>
+        )} */}
+        {errorTransferAmount && (
+          <ErrorMini className={s.errorMini} error={errorTransferAmount} />
         )}
       </form>
     </div>

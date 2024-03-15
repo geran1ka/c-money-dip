@@ -121,7 +121,7 @@
   color: red;
 }
 
-.errorSubmit {
+.errorMini {
   position: absolute;
   bottom: -30px;
   right: 5px;
@@ -130,7 +130,7 @@
 }
 
 @media (max-width: 768px) {
-  .errorSubmit {
+  .errorMini {
     right: 50%;
     transform: translateX(50%);
   }

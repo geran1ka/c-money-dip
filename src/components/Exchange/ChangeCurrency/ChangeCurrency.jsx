@@ -1,12 +1,12 @@
 import classNames from "classnames";
 import s from "./ChangeCurrency.module.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { randomId } from "../../../helper/randomId";
 import { useForm } from "react-hook-form";
 import { fetchAllCurreency } from "../../../store/allCurrency/allCurrency.slice";
 import { fetchCurrencyBy } from "../../../store/myCurrency/myCurrency.slice";
-import { Error, Error2 } from "../../UI/Error/Error";
+import { ErrorMini } from "../../UI/Error/Error";
 
 export const ChangeCurrency = () => {
   const accessToken = useSelector((state) => state.auth.accessToken);
@@ -16,22 +16,25 @@ export const ChangeCurrency = () => {
   );
 
   const { error: errorBy } = useSelector((state) => state.myCurrency);
-  console.log("errorBy: ", errorBy);
-
-  const [currency, setCurrency] = useState({
-    to: "",
-    from: "",
-  });
-
-  const [isDisabled, setIsDisabled] = useState(true);
-
   const {
     reset,
     register,
     handleSubmit,
     formState: { errors },
     getValues,
+    watch,
   } = useForm();
+
+  // const DEFAULT_VALUE = {
+  //   to: getValues("to"),
+  //   from: getValues("from"),
+  // };
+
+  // const [currency, setCurrency] = useState(DEFAULT_VALUE);
+  // console.log("currency: ", currency);
+
+  // const [isDisabled, setIsDisabled] = useState(true);
+  // console.log("isDisabled: ", isDisabled);
 
   useEffect(() => {
     if (accessToken) {
@@ -39,23 +42,35 @@ export const ChangeCurrency = () => {
     }
   }, [dispatch, accessToken]);
 
-  useEffect(() => {
-    setCurrency({ to: getValues("to"), from: getValues("from") });
-  }, [getValues]);
+  // useEffect(() => {
+  //   setCurrency({ to: getValues("to"), from: getValues("from") });
+  // }, []);
 
-  const onChange = (e) => {
-    if (currency.to === currency.from) {
-      setIsDisabled(false);
-    } else {
-      setIsDisabled(true);
-    }
-    const { name, value } = e.target;
-    setCurrency({ ...currency, [name]: value });
-  };
+  const from = watch("from");
+  console.log("from: ", from);
+  const to = watch("to");
+  console.log("to: ", to);
+
+  useEffect(() => {
+    let defaultValues = {};
+    defaultValues.from = [...allCurrency].sort()[0] || "";
+    defaultValues.to = [...allCurrency].sort()[0] || "";
+    reset({ ...defaultValues });
+  }, [reset, allCurrency]);
+
+  // const onChange = (e) => {
+  //   console.log(e.target.value);
+  //   console.log(currency.to === currency.from);
+  //   if (currency.to === currency.from) {
+  //     setIsDisabled(true);
+  //   } else {
+  //     setIsDisabled(false);
+  //   }
+  //   const { name, value } = e.target;
+  //   setCurrency({ ...currency, [name]: value });
+  // };
 
   const onSubmit = (data) => {
-    console.log("data: ", data);
-    console.log(data);
     dispatch(fetchCurrencyBy(data));
     reset();
   };
@@ -67,26 +82,21 @@ export const ChangeCurrency = () => {
         <legend className={s.legend}>
           <div className={s.inputWrapper}>
             <label className={s.label}>Откуда</label>
-            <select
-              className={s.input}
-              {...register("from")}
-              value={currency.from}
-              onChange={onChange}>
+            <select className={s.input} {...register("from")} value={from}>
               {allCurrency?.length > 0 &&
-                [...allCurrency].sort().map((item) => (
-                  <option key={randomId()} value={item}>
-                    {item}
-                  </option>
-                ))}
+                [...allCurrency]
+                  .sort()
+                  .filter((item) => item.amount !== 0)
+                  .map((item) => (
+                    <option key={randomId()} value={item}>
+                      {item}
+                    </option>
+                  ))}
             </select>
           </div>
           <div className={s.inputWrapper}>
             <label className={s.label}>Куда</label>
-            <select
-              className={s.input}
-              {...register("to")}
-              value={currency.to}
-              onChange={onChange}>
+            <select className={s.input} {...register("to")} value={to}>
               {allCurrency?.length > 0 &&
                 [...allCurrency].sort().map((item) => (
                   <option key={randomId()} value={item}>
@@ -115,11 +125,11 @@ export const ChangeCurrency = () => {
         </legend>
         <button
           className={classNames(s.button, "button")}
-          disabled={isDisabled}>
+          disabled={to === from}>
           Обменять
         </button>
       </form>
-      {errorBy && <Error2 error={errorBy} />}
+      {errorBy && <ErrorMini error={errorBy} />}
     </div>
   );
 };

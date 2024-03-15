@@ -10,15 +10,16 @@ import {
   fetchCreateAccount,
   sortAccounts,
 } from "../../store/accounts/accounts.slice";
-import { Error } from "../UI/Error/Error";
+import { Error, ErrorMini } from "../UI/Error/Error";
 import { Preloader } from "../Preloader/Preloader";
-// import { accounts } from "../../data/accounts";
 
 export const AccountsList = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { accessToken } = useSelector((state) => state.auth);
-  const { accounts, loading, error } = useSelector((state) => state.accounts);
+  const { accounts, loading, error, errorCreateAccount } = useSelector(
+    (state) => state.accounts,
+  );
   useEffect(() => {
     if (!accessToken) {
       navigate("/auth");
@@ -34,11 +35,9 @@ export const AccountsList = () => {
   const handlerSortAccounts = (e) => {
     dispatch(sortAccounts(e.target.value));
   };
-  // !ToDo добаить Preload
-  // if (loading) return <div>Загрузка....</div>;
 
   // !ToDo добаить Error
-  if (error) return <Error error={error} />;
+  if (error) return <Error className={s.error} error={error} />;
 
   return (
     <Container>
@@ -49,6 +48,9 @@ export const AccountsList = () => {
           onClick={handlerOpenNewAccount}>
           Открыть новый счет
         </button>
+        {errorCreateAccount && (
+          <ErrorMini className={s.errorMini} error={errorCreateAccount} />
+        )}
         {loading ? (
           <Preloader />
         ) : (

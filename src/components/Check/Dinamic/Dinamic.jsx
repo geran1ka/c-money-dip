@@ -31,15 +31,12 @@ export const Dinamic = ({ transactions }) => {
           className={s.select}
           value={dinamicsByYear}
           onChange={handlerChangeYears}>
-          {selectYears.length > 0 ? (
+          {selectYears.length > 0 &&
             selectYears.map((year) => (
               <option key={randomId()} value={year}>
                 {year}
               </option>
-            ))
-          ) : (
-            <div>Preloader</div>
-          )}
+            ))}
         </select>
       </div>
       <LineChart balanceYear={balancesByYearObj[dinamicsByYear]} />

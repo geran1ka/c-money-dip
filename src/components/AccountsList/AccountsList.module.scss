@@ -169,3 +169,29 @@
     flex-basis: calc(100% / 3 - 14px);
   }
 }
+
+.error {
+  color: red;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.5;
+  text-align: center;
+  align-self: center;
+
+  @media (min-width: 540px) {
+    font-size: 22px;
+  }
+
+  @media (min-width: 768px) {
+    font-size: 28px;
+  }
+}
+
+.errorMini {
+  color: red;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.5;
+  text-align: center;
+  align-self: center;
+}

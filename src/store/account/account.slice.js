@@ -60,6 +60,7 @@ export const fetchTransferAmount = createAsyncThunk(
       }
 
       const data = await response.json();
+      console.log("data: ", data);
 
       if (data.error) {
         throw new Error(data.error);
@@ -75,6 +76,7 @@ const initialState = {
   account: {},
   loading: false,
   error: "",
+  errorTransferAmount: "",
 };
 
 const accountSlice = createSlice({
@@ -85,12 +87,13 @@ const accountSlice = createSlice({
     builder
       .addCase(fetchAccount.pending, (state) => {
         state.loading = true;
-        state.error = null;
+        state.error = "";
       })
       .addCase(fetchAccount.fulfilled, (state, action) => {
+        console.log("action: ", action);
         state.account = action.payload.payload;
         state.loading = false;
-        state.error = null;
+        state.error = "";
       })
       .addCase(fetchAccount.rejected, (state, action) => {
         state.loading = false;
@@ -98,16 +101,18 @@ const accountSlice = createSlice({
       })
       .addCase(fetchTransferAmount.pending, (state) => {
         // state.loading = true;
-        state.error = null;
+        state.errorTransferAmount = "";
       })
       .addCase(fetchTransferAmount.fulfilled, (state, action) => {
+        console.log("action: ", action);
         state.account = action.payload.payload;
         state.loading = false;
-        state.error = null;
+        state.errorTransferAmount = "";
       })
       .addCase(fetchTransferAmount.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload.message;
+        console.log("action: ", action);
+        // state.loading = false;
+        state.errorTransferAmount = action.payload.message;
       });
   },
 });

@@ -5,7 +5,6 @@ import { useState } from "react";
 import { WS_URL_API } from "../../../const/const";
 
 export const Course = () => {
-  console.log();
   const [changes, setChanges] = useState([]);
   useWebSocket(`${WS_URL_API}/currency-feed`, {
     onMessage: (messageEvent) => {
@@ -18,8 +17,6 @@ export const Course = () => {
     },
     shouldReconnect: () => true,
   });
-
-  console.log(changes);
 
   return (
     <div className={s.wrapper}>

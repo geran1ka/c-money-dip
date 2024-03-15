@@ -1,4 +1,5 @@
 export const getBalancesYear = (data, account) => {
+  console.log("1");
   const balance = {};
 
   data.reduce((acc, item) => {

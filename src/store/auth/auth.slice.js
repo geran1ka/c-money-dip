@@ -4,7 +4,6 @@ import { URL_API } from "../../const/const";
 export const fetchAccessToken = createAsyncThunk(
   "auth/fetchAccessToken",
   async ({ login, password }, { rejectWithValue }) => {
-    console.log("login: ", login);
     try {
       const response = await fetch(`${URL_API}/login`, {
         method: "POST",
@@ -19,6 +18,11 @@ export const fetchAccessToken = createAsyncThunk(
       }
 
       const data = await response.json();
+
+      if (data.error) {
+        throw new Error(data.error);
+      }
+
       return data;
     } catch (error) {
       return rejectWithValue(error);
@@ -51,9 +55,7 @@ const authSlice = createSlice({
           localStorage.setItem("accessToken", action.payload.payload.token);
         }
         state.loading = false;
-        action.payload?.error ?
-          (state.error = action.payload.error) :
-          (state.error = null);
+        state.error = action.payload.error;
       })
       .addCase(fetchAccessToken.rejected, (state, action) => {
         state.loading = false;

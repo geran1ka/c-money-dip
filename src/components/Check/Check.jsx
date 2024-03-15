@@ -22,6 +22,8 @@ export const Check = () => {
     error,
   } = useSelector((state) => state.account);
 
+  console.log("transactions: ", transactions);
+
   const navigate = useNavigate();
   useEffect(() => {
     if (!accessToken) {
@@ -33,7 +35,7 @@ export const Check = () => {
     dispatch(fetchAccount(accountId));
   }, [dispatch, accountId]);
 
-  // if (error) return <Error error={error} />;
+  if (error) return <Error className={s.error} error={error} />;
 
   return (
     <Container>
