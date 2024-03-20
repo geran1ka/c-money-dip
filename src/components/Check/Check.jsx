@@ -8,7 +8,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAccount } from "../../store/account/account.slice";
-import { Statistic } from "./Statistic/Statistic";
+// import { Statistic } from "./Statistic/Statistic";
 import { Preloader } from "../Preloader/Preloader";
 import { Error } from "../UI/Error/Error";
 
@@ -24,12 +24,12 @@ export const Check = () => {
 
   console.log("transactions: ", transactions);
 
-  const navigate = useNavigate();
-  useEffect(() => {
-    if (!accessToken) {
-      navigate("/auth");
-    }
-  }, [accessToken, navigate]);
+  // const navigate = useNavigate();
+  // useEffect(() => {
+  //   if (!accessToken) {
+  //     navigate("/auth");
+  //   }
+  // }, [accessToken, navigate]);
 
   useEffect(() => {
     dispatch(fetchAccount(accountId));

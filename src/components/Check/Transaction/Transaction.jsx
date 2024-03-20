@@ -44,11 +44,12 @@ export const Transaction = () => {
             })}
           />
           <datalist id="listSelect">
-            {accounts.map((item) => (
-              <option key={randomId()} value={item.account}>
-                {item.account}
-              </option>
-            ))}
+            {accounts.length &&
+              accounts.map((item) => (
+                <option key={randomId()} value={item.account}>
+                  {item.account}
+                </option>
+              ))}
           </datalist>
         </div>
         <div className={s.wrap}>
@@ -70,9 +71,6 @@ export const Transaction = () => {
         <button type="submit" className={classNames(s.button, "button")}>
           Перевести
         </button>
-        {/* {transactionError && (
-          <p className={s.errorSubmit}>{getMessageErrorRu(transactionError)}</p>
-        )} */}
         {errorTransferAmount && (
           <ErrorMini className={s.errorMini} error={errorTransferAmount} />
         )}

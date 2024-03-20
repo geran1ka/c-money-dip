@@ -55,11 +55,11 @@ const authSlice = createSlice({
           localStorage.setItem("accessToken", action.payload.payload.token);
         }
         state.loading = false;
-        state.error = action.payload.error;
+        state.error = "";
       })
       .addCase(fetchAccessToken.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error;
+        state.error = action.payload.message;
       });
   },
 });

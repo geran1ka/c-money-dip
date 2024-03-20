@@ -13,10 +13,7 @@ export const Dinamic = ({ transactions }) => {
   ];
 
   const [dinamicsByYear, setDinamicsByYear] = useState(selectYears[0]);
-  const balancesByYearObj = useMemo(
-    () => getBalancesYear(transactions, account),
-    [account],
-  );
+  const balancesByYearObj = getBalancesYear(transactions, account);
 
   const handlerChangeYears = (e) => {
     setDinamicsByYear(+e.target.value);

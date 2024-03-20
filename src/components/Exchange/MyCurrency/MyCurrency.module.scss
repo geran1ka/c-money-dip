@@ -15,11 +15,11 @@
 
 .tbody {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   justify-content: space-between;
 
-  & tr {
-    border: 1px solid var(--blue);
+  @media (min-width: 540px) {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 .code {
@@ -36,3 +36,11 @@
   font-weight: 700;
   line-height: 20px;
 }
+
+// .error {
+//   color: red;
+//   font-size: 16px;
+//   font-weight: 700;
+//   line-height: 1.5;
+//   text-align: center;
+// }

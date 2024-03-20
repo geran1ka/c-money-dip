@@ -33,10 +33,11 @@
 .wrapper {
   display: flex;
   justify-content: space-between;
-  column-gap: 20px;
+  flex-direction: column;
+  gap: 20px;
 
-  @media (max-width: 768px) {
-    flex-direction: column;
+  @media (min-width: 980px) {
+    flex-direction: row;
     gap: 20px;
   }
 }

@@ -7,34 +7,23 @@ import { useForm } from "react-hook-form";
 import { fetchAllCurreency } from "../../../store/allCurrency/allCurrency.slice";
 import { fetchCurrencyBy } from "../../../store/myCurrency/myCurrency.slice";
 import { ErrorMini } from "../../UI/Error/Error";
+import { getArrayIsObject } from "../../../helper/getArrayIsObject";
 
 export const ChangeCurrency = () => {
   const accessToken = useSelector((state) => state.auth.accessToken);
   const dispatch = useDispatch();
-  const { allCurrency, loading, error } = useSelector(
-    (state) => state.allCurrency,
-  );
+  const { allCurrency, error } = useSelector((state) => state.allCurrency);
 
-  const { error: errorBy } = useSelector((state) => state.myCurrency);
+  const { errorCurrencyBy } = useSelector((state) => state.myCurrency);
+
   const {
     reset,
     register,
     handleSubmit,
     formState: { errors },
-    getValues,
+
     watch,
   } = useForm();
-
-  // const DEFAULT_VALUE = {
-  //   to: getValues("to"),
-  //   from: getValues("from"),
-  // };
-
-  // const [currency, setCurrency] = useState(DEFAULT_VALUE);
-  // console.log("currency: ", currency);
-
-  // const [isDisabled, setIsDisabled] = useState(true);
-  // console.log("isDisabled: ", isDisabled);
 
   useEffect(() => {
     if (accessToken) {
@@ -42,33 +31,15 @@ export const ChangeCurrency = () => {
     }
   }, [dispatch, accessToken]);
 
-  // useEffect(() => {
-  //   setCurrency({ to: getValues("to"), from: getValues("from") });
-  // }, []);
-
   const from = watch("from");
-  console.log("from: ", from);
   const to = watch("to");
-  console.log("to: ", to);
 
   useEffect(() => {
-    let defaultValues = {};
+    const defaultValues = {};
     defaultValues.from = [...allCurrency].sort()[0] || "";
-    defaultValues.to = [...allCurrency].sort()[0] || "";
+    defaultValues.to = [...allCurrency].sort()[1] || "";
     reset({ ...defaultValues });
   }, [reset, allCurrency]);
-
-  // const onChange = (e) => {
-  //   console.log(e.target.value);
-  //   console.log(currency.to === currency.from);
-  //   if (currency.to === currency.from) {
-  //     setIsDisabled(true);
-  //   } else {
-  //     setIsDisabled(false);
-  //   }
-  //   const { name, value } = e.target;
-  //   setCurrency({ ...currency, [name]: value });
-  // };
 
   const onSubmit = (data) => {
     dispatch(fetchCurrencyBy(data));
@@ -129,7 +100,10 @@ export const ChangeCurrency = () => {
           Обменять
         </button>
       </form>
-      {errorBy && <ErrorMini error={errorBy} />}
+      {errorCurrencyBy && (
+        <ErrorMini className={s.errorMini} error={errorCurrencyBy} />
+      )}
+      {error && <ErrorMini className={s.errorMini} error={error} />}
     </div>
   );
 };

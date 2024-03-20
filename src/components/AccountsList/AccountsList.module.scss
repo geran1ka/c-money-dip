@@ -38,7 +38,15 @@
   }
 }
 
+.wrapperButton {
+  justify-self: end;
+  position: relative;
+  // max-width: 300px;
+  // width: 100%;
+}
+
 .button {
+  margin-left: auto;
   font-family: Nunito;
   font-size: 14px;
   font-weight: 700;
@@ -171,13 +179,6 @@
 }
 
 .error {
-  color: red;
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 1.5;
-  text-align: center;
-  align-self: center;
-
   @media (min-width: 540px) {
     font-size: 22px;
   }
@@ -188,10 +189,8 @@
 }
 
 .errorMini {
-  color: red;
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 1.5;
-  text-align: center;
-  align-self: center;
+  position: absolute;
+  bottom: -25px;
+  right: 0;
+  text-wrap: nowrap;
 }

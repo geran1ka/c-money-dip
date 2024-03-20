@@ -7,7 +7,7 @@
   }
 
   @media (min-width: 768px) {
-    padding: 0px 0;
+    padding: 60px 0;
   }
 }
 
@@ -17,18 +17,10 @@
   left: 15px;
 }
 
-// .error {
-//   color: red;
-//   font-size: 16px;
-//   font-weight: 700;
-//   line-height: 1.5;
-//   text-align: center;
-
-//   @media (min-width: 540px) {
-//     font-size: 22px;
-//   }
-
-//   @media (min-width: 768px) {
-//     font-size: 28px;
-//   }
-// }
+.error {
+  color: red;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.5;
+  text-align: center;
+}

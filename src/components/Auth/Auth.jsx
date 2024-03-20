@@ -22,6 +22,7 @@ export const Auth = () => {
   };
 
   const { error } = useSelector((state) => state.auth);
+  console.log("error: ", error);
   useEffect(() => {
     reset();
   }, [error, reset]);

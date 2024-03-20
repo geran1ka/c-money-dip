@@ -4,13 +4,16 @@ import s from "./MyCurrency.module.scss";
 import { useEffect } from "react";
 import { fetchMyCurrency } from "../../../store/myCurrency/myCurrency.slice";
 import { getArrayIsObject } from "../../../helper/getArrayIsObject";
+import { Preloader } from "../../Preloader/Preloader";
+import { Error, ErrorMini } from "../../UI/Error/Error";
 
 export const MyCurrency = () => {
   const dispatch = useDispatch();
   const accessToken = useSelector((state) => state.auth.accessToken);
-  const { myCurrency, loadingMy, errorMy } = useSelector(
+  const { myCurrency, loadingMy, errorMyCurrency } = useSelector(
     (state) => state.myCurrency,
   );
+  console.log("errorMy: ", errorMyCurrency);
 
   const myCurrencyArr = getArrayIsObject(myCurrency, "values");
 
@@ -19,6 +22,11 @@ export const MyCurrency = () => {
       dispatch(fetchMyCurrency());
     }
   }, [dispatch, accessToken]);
+
+  if (loadingMy) return <Preloader />;
+  if (errorMyCurrency) {
+    return <ErrorMini className={s.error} error={errorMyCurrency} />;
+  }
 
   return (
     <div>
@@ -31,13 +39,22 @@ export const MyCurrency = () => {
           </tr>
         </thead>
         <tbody className={s.tbody}>
-          {myCurrencyArr.length &&
-            myCurrencyArr.map((item) => (
-              <tr key={item.code}>
-                <td className={s.code}>{item.code}</td>
-                <td className={s.amount}>{item.amount.toLocaleString()}</td>
-              </tr>
-            ))}
+          {myCurrencyArr?.length ? (
+            myCurrencyArr
+              .filter((item) => Math.round(item.amount) !== 0)
+              .map((item) => (
+                <tr key={item.code}>
+                  <td className={s.code}>{item.code}</td>
+                  <td className={s.amount}>{item.amount.toLocaleString()}</td>
+                </tr>
+              ))
+          ) : (
+            <tr>
+              <td className={s.code} colSpan={2}>
+                Что-то пошло не так...
+              </td>
+            </tr>
+          )}
         </tbody>
       </table>
     </div>

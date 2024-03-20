@@ -6,6 +6,7 @@ import { getIsRussianLanguage } from "../../../helper/getIsRussianLanguage";
 
 export const Error = ({ error, className = "" }) => {
   const isRussianLanguage = /[а-яА-Я]/gi.test(error);
+  console.log("isRussianLanguage: ", isRussianLanguage);
 
   return (
     <Container>
@@ -20,6 +21,7 @@ export const Error = ({ error, className = "" }) => {
 
 export const ErrorMini = ({ error, className = "" }) => {
   const isRussianLanguage = getIsRussianLanguage(error);
+  console.log("isRussianLanguage: ", isRussianLanguage);
 
   return (
     <p className={classNames(s.error, className && className)}>

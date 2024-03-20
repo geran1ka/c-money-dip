@@ -75,8 +75,10 @@ export const fetchCurrencyBy = createAsyncThunk(
 
 const initialState = {
   myCurrency: {},
-  loading: false,
-  error: "",
+  loadingMyCurrency: false,
+  errorMyCurrency: "",
+  loadingCurrencyBy: false,
+  errorCurrencyBy: "",
 };
 
 const myCurrencySlice = createSlice({
@@ -86,30 +88,30 @@ const myCurrencySlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchMyCurrency.pending, (state) => {
-        state.loading = true;
-        state.error = "";
+        state.loadingMyCurrency = true;
+        state.errorMyCurrency = "";
       })
       .addCase(fetchMyCurrency.fulfilled, (state, action) => {
         state.myCurrency = action.payload.payload;
-        state.loading = false;
-        state.error = "";
+        state.loadingMyCurrency = false;
+        state.errorMyCurrency = "";
       })
       .addCase(fetchMyCurrency.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload.message;
+        state.loadingMyCurrency = false;
+        state.errorMyCurrency = action.payload.message;
       })
       .addCase(fetchCurrencyBy.pending, (state) => {
-        // state.loading = true;
-        state.error = "";
+        // state.loadingCurrencyBy = true;
+        state.errorCurrencyBy = "";
       })
       .addCase(fetchCurrencyBy.fulfilled, (state, action) => {
         state.myCurrency = action.payload.payload;
-        state.loading = false;
-        state.error = "";
+        state.loadingCurrencyBy = false;
+        state.errorCurrencyBy = "";
       })
       .addCase(fetchCurrencyBy.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload.message;
+        state.loadingCurrencyBy = false;
+        state.errorCurrencyBy = action.payload.message;
       });
   },
 });

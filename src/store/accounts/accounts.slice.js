@@ -62,7 +62,7 @@ export const fetchCreateAccount = createAsyncThunk(
 );
 
 const initialState = {
-  accounts: [],
+  accounts: JSON.parse(localStorage.getItem("accounts")) || [],
   loading: false,
   error: "",
   sort: "",
@@ -85,7 +85,15 @@ const accountsSlice = createSlice({
         state.error = "";
       })
       .addCase(fetchAccounts.fulfilled, (state, action) => {
-        state.accounts = action.payload.payload;
+        console.log("action: ", action);
+        if (action.payload.payload) {
+          state.accounts = action.payload.payload;
+          localStorage.setItem(
+            "accounts",
+            JSON.stringify(action.payload.payload),
+          );
+        }
+
         state.loading = false;
         state.error = "";
       })

@@ -24,25 +24,25 @@
 .legend {
   display: flex;
   margin-bottom: 25px;
-  column-gap: 20px;
+  gap: 10px;
+  justify-content: space-between;
+  flex-direction: column;
 
-  @media (max-width: 768px) {
-    flex-direction: column;
+  @media (min-width: 540px) {
+    flex-direction: row;
+  }
+  @media (min-width: 768px) {
+    gap: 15px;
   }
 }
 .inputWrapper {
   display: flex;
   flex-direction: column;
-  min-width: 150px;
+  min-width: 140px;
   position: relative;
+  width: 100%;
 }
-.inputWrapper:not(:last-of-type) {
-  // margin-right: 35px;
 
-  @media (max-width: 768px) {
-    margin-right: 0;
-  }
-}
 .label {
   color: var(--text);
   font-family: Nunito;
@@ -52,17 +52,12 @@
   margin-bottom: 2px;
   padding-left: 10px;
 }
+
 .input {
   border-radius: 6px;
   padding: 10px;
 }
-.input:last-of-type {
-  max-width: 147px;
 
-  @media (max-width: 768px) {
-    width: 100%;
-  }
-}
 .button {
   align-self: flex-end;
   font-family: Nunito;
@@ -74,9 +69,15 @@
 }
 
 .error {
-  color: tomato;
   font-size: 12px;
   position: absolute;
   right: 5px;
   bottom: -20px;
+}
+
+.errorMini {
+  font-size: 12px;
+  position: absolute;
+  left: 20px;
+  bottom: 15%;
 }

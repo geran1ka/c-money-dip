@@ -94,24 +94,20 @@ const accountSlice = createSlice({
         state.account = action.payload.payload;
         state.loading = false;
         state.error = "";
+        state.errorTransferAmount = "";
       })
       .addCase(fetchAccount.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload.message;
       })
       .addCase(fetchTransferAmount.pending, (state) => {
-        // state.loading = true;
         state.errorTransferAmount = "";
       })
       .addCase(fetchTransferAmount.fulfilled, (state, action) => {
-        console.log("action: ", action);
         state.account = action.payload.payload;
-        state.loading = false;
         state.errorTransferAmount = "";
       })
       .addCase(fetchTransferAmount.rejected, (state, action) => {
-        console.log("action: ", action);
-        // state.loading = false;
         state.errorTransferAmount = action.payload.message;
       });
   },

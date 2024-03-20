@@ -43,14 +43,17 @@ export const AccountsList = () => {
     <Container>
       <div className={s.container}>
         <h2 className={s.title}>Здравствуйте, Александр!</h2>
-        <button
-          className={classNames(s.button, "button")}
-          onClick={handlerOpenNewAccount}>
-          Открыть новый счет
-        </button>
-        {errorCreateAccount && (
-          <ErrorMini className={s.errorMini} error={errorCreateAccount} />
-        )}
+        <div className={s.wrapperButton}>
+          <button
+            className={classNames(s.button, "button")}
+            onClick={handlerOpenNewAccount}>
+            Открыть новый счет
+          </button>
+          {errorCreateAccount && (
+            <ErrorMini className={s.errorMini} error={errorCreateAccount} />
+          )}
+        </div>
+
         {loading ? (
           <Preloader />
         ) : (
