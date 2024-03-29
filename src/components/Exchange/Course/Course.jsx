@@ -22,8 +22,8 @@ export const Course = () => {
     <div className={s.wrapper}>
       <h3 className={s.title}>Изменение курса в режиме реального времени</h3>
       <div className={s.tbody}>
-        {changes.length
-          ? changes.map((change, index) => (
+        {changes.length ?
+          changes.map((change, index) => (
               <div className={s.row} key={index}>
                 <span className={s.cellFirst}>
                   {change.from}/{change.to}
@@ -57,8 +57,8 @@ export const Course = () => {
                   )}
                 </span>
               </div>
-            ))
-          : ""}
+            )) :
+          ""}
       </div>
     </div>
   );

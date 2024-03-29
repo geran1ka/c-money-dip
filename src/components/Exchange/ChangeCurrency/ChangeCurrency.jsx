@@ -14,7 +14,12 @@ export const ChangeCurrency = () => {
   const dispatch = useDispatch();
   const { allCurrency, error } = useSelector((state) => state.allCurrency);
 
-  const { errorCurrencyBy } = useSelector((state) => state.myCurrency);
+  const { myCurrency, errorCurrencyBy } = useSelector(
+    (state) => state.myCurrency,
+  );
+  const myCurrencyArr = getArrayIsObject(myCurrency, "values")
+    .filter((item) => item.amount !== 0)
+    .map((item) => item.code);
 
   const {
     reset,
@@ -36,9 +41,10 @@ export const ChangeCurrency = () => {
 
   useEffect(() => {
     const defaultValues = {};
-    defaultValues.from = [...allCurrency].sort()[0] || "";
+    defaultValues.from = [...myCurrencyArr].sort()[0] || "";
     defaultValues.to = [...allCurrency].sort()[1] || "";
     reset({ ...defaultValues });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [reset, allCurrency]);
 
   const onSubmit = (data) => {

@@ -16,20 +16,18 @@ export const Check = () => {
   const dispatch = useDispatch();
   const accountId = useParams().id;
   const accessToken = useSelector((state) => state.auth.accessToken);
-  const {
-    account: { account, transactions },
-    loading,
-    error,
-  } = useSelector((state) => state.account);
+  const { account, transactions, loading, error } = useSelector(
+    (state) => state.account,
+  );
 
   console.log("transactions: ", transactions);
 
-  // const navigate = useNavigate();
-  // useEffect(() => {
-  //   if (!accessToken) {
-  //     navigate("/auth");
-  //   }
-  // }, [accessToken, navigate]);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!accessToken) {
+      navigate("/auth");
+    }
+  }, [accessToken, navigate]);
 
   useEffect(() => {
     dispatch(fetchAccount(accountId));
@@ -61,7 +59,7 @@ export const Check = () => {
               </Link>
             </div>
             {transactions?.length > 0 && (
-              <Dinamic transactions={transactions} />
+              <Dinamic transactions={transactions} account={account} />
             )}
             <History transactions={transactions} account={account} />
             <Transaction />

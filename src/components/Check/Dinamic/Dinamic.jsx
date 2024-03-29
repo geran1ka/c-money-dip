@@ -1,12 +1,11 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import s from "./Dinamic.module.scss";
 import { LineChart } from "./Line/Line";
 import { randomId } from "../../../helper/randomId";
-import { useSelector } from "react-redux";
 import { getBalancesYear } from "../../../helper/getBalancesYeat";
 
-export const Dinamic = ({ transactions }) => {
-  const { account } = useSelector((state) => state.account.account);
+export const Dinamic = ({ account, transactions }) => {
+  // const { account, transactions } = useSelector((state) => state.account);
 
   const selectYears = [
     ...new Set(transactions?.map((item) => new Date(item.date).getFullYear())),

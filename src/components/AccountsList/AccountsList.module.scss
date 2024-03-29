@@ -144,6 +144,7 @@
   flex-wrap: wrap;
   gap: 20px;
   justify-content: center;
+  width: 100%;
 
   @media (min-width: 640px) {
     justify-content: start;

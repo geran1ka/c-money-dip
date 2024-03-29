@@ -34,7 +34,8 @@ export const fetchTransferAmount = createAsyncThunk(
   async (info, { getState, rejectWithValue }) => {
     try {
       const accessToken = getState().auth.accessToken;
-      const from = getState().account.account.account;
+      const from = getState().account.account;
+      console.log("from: ", from);
       const { to, amount } = info;
 
       if (!accessToken || !from) return;
@@ -65,6 +66,8 @@ export const fetchTransferAmount = createAsyncThunk(
       if (data.error) {
         throw new Error(data.error);
       }
+
+      console.log("data: ", data);
       return data;
     } catch (error) {
       return rejectWithValue(error);
@@ -73,7 +76,8 @@ export const fetchTransferAmount = createAsyncThunk(
 );
 
 const initialState = {
-  account: {},
+  account: "",
+  transactions: [],
   loading: false,
   error: "",
   errorTransferAmount: "",
@@ -91,7 +95,8 @@ const accountSlice = createSlice({
       })
       .addCase(fetchAccount.fulfilled, (state, action) => {
         console.log("action: ", action);
-        state.account = action.payload.payload;
+        state.account = action.payload.payload.account;
+        state.transactions = action.payload.payload.transactions;
         state.loading = false;
         state.error = "";
         state.errorTransferAmount = "";
@@ -104,7 +109,8 @@ const accountSlice = createSlice({
         state.errorTransferAmount = "";
       })
       .addCase(fetchTransferAmount.fulfilled, (state, action) => {
-        state.account = action.payload.payload;
+        console.log("action: ", action);
+        state.transactions = action.payload.payload.transactions;
         state.errorTransferAmount = "";
       })
       .addCase(fetchTransferAmount.rejected, (state, action) => {

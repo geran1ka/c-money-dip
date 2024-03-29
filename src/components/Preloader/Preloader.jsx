@@ -1,10 +1,11 @@
-import { FadeLoader, MoonLoader } from "react-spinners";
+import { FadeLoader } from "react-spinners";
 
 export const Preloader = ({ inTable }) => {
   const cssProperties = {
     position: "absolute",
-    top: "calc(50% - 50px)",
-    left: "calc(50% - 50px)",
+    top: "50%",
+    left: "50%",
+    transforme: "translate(-50%, -50%)",
   };
 
   const tableCssProperties = {

@@ -21,6 +21,7 @@ export const Transaction = () => {
   } = useForm();
 
   const onSubmit = (data) => {
+    console.log("data: ", data);
     dispatch(fetchTransferAmount(data));
     reset();
   };
