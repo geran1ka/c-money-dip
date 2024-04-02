@@ -24,7 +24,9 @@ export const ErrorMini = ({ error, className = "" }) => {
   console.log("isRussianLanguage: ", isRussianLanguage);
 
   return (
-    <p className={classNames(s.error, className && className)}>
+    <p
+      className={classNames(s.error, className && className)}
+      data-test="auth-error">
       {isRussianLanguage ? error : getMessageErrorRu(error)}
     </p>
   );

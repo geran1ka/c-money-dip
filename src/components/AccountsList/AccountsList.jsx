@@ -42,7 +42,9 @@ export const AccountsList = () => {
   return (
     <Container>
       <div className={s.container}>
-        <h2 className={s.title}>Здравствуйте, Developer!</h2>
+        <h2 className={s.title} data-test="account-user">
+          Здравствуйте, Developer!
+        </h2>
         <div className={s.wrapperButton}>
           <button
             className={classNames(s.button, "button")}
