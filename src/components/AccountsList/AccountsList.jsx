@@ -42,7 +42,7 @@ export const AccountsList = () => {
   return (
     <Container>
       <div className={s.container}>
-        <h2 className={s.title}>Здравствуйте, Александр!</h2>
+        <h2 className={s.title}>Здравствуйте, Developer!</h2>
         <div className={s.wrapperButton}>
           <button
             className={classNames(s.button, "button")}
@@ -85,10 +85,13 @@ export const AccountsList = () => {
                 </option>
               </select>
             </div>
-            <ul className={s.list}>
+            <ul className={s.list} data-test="accounts">
               {accounts.length > 0 ? (
                 accounts.map((account) => (
-                  <li className={s.card} key={account.account}>
+                  <li
+                    className={s.card}
+                    key={account.account}
+                    data-test="account">
                     <AccountsItem props={account} />
                   </li>
                 ))

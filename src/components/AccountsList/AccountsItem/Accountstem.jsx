@@ -6,17 +6,19 @@ export const AccountsItem = ({ props }) => {
 
   return (
     <Link to={`/account/${account}`}>
-      <p className={s.id}>{account}</p>
+      <p className={s.id} data-test="account-number">
+        {account}
+      </p>
       <p className={s.balance}>{balance.toLocaleString()}</p>
       <div className={s.info}>
         <div>
           <p>открыт</p>
           <p>
-            {date ?
-              new Date(date).toLocaleDateString() :
-              transactions[0]?.date ?
-                new Date(transactions[0]?.date).toLocaleDateString() :
-                "Нет данных"}
+            {date
+              ? new Date(date).toLocaleDateString()
+              : transactions[0]?.date
+                ? new Date(transactions[0]?.date).toLocaleDateString()
+                : "Нет данных"}
           </p>
         </div>
         <div>

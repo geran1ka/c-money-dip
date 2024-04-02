@@ -34,7 +34,9 @@ export const Auth = () => {
           <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
             <legend className={s.title}>Вход в аккаунт</legend>
             <div className={s.inputWrapper}>
-              <span className={classNames(s.error, s.errorPosition)}>
+              <span
+                className={classNames(s.error, s.errorPosition)}
+                data-test="auth-error-login">
                 {errors.login && errors.login.message}
               </span>
               <label className={s.label}>Логин</label>
@@ -54,7 +56,9 @@ export const Auth = () => {
               />
             </div>
             <div className={s.inputWrapper}>
-              <span className={classNames(s.error, s.errorPosition)}>
+              <span
+                className={classNames(s.error, s.errorPosition)}
+                data-test="auth-error-password">
                 {errors.password && errors.password.message}
               </span>
               <label className={s.label}>Пароль</label>
@@ -74,11 +78,20 @@ export const Auth = () => {
                 aria-invalid={!!errors.password}
               />
             </div>
-            <button className={classNames(s.button, "button")} type="submit">
+            <button
+              className={classNames(s.button, "button")}
+              type="submit"
+              data-test="btn-enter">
               Войти
             </button>
           </form>
-          {error && <ErrorMini className={s.error} error={error} />}
+          {error && (
+            <ErrorMini
+              className={s.error}
+              error={error}
+              data-test="auth-error"
+            />
+          )}
         </div>
       </div>
     </Container>

@@ -1,86 +1,74 @@
 /// <reference types="cypress" />
 
+export function loginMe(login, password) {
+  if (login) {
+    cy.get('[name="login"]').type(login);
+  }
+  if (password) {
+    cy.get('[name="password"]').type(password);
+  }
+  cy.contains("Войти").click();
+}
+
 describe("Тестируем ", () => {
   beforeEach(() => {
     cy.visit("https://c-money-dip.vercel.app/");
   });
 
   it("Авторизация, не валидный логин - цифра", () => {
-    cy.get('[name="login"]').type("developer1");
-    cy.get('[name="password"]').type("methed");
-    cy.get("._button_acsk9_126 ").click();
-    cy.get("._error_acsk9_145 ").contains("Невалидный логин");
+    loginMe("developer1", "methed");
+    cy.get('[data-test="auth-error-login"]').contains("Невалидный логин");
   });
 
   it("Авторизация, не валидный логин - кириллица", () => {
-    cy.get('[name="login"]').type("developerк");
-    cy.get('[name="password"]').type("methed");
-    cy.get("._button_acsk9_126 ").click();
+    loginMe("developerк", "methed");
     cy.get("._error_acsk9_145 ").contains("Невалидный логин");
   });
 
   it("Авторизация, не валидный логин - меньше 6 символов", () => {
-    cy.get('[name="login"]').type("deve");
-    cy.get('[name="password"]').type("methed");
-    cy.get("._button_acsk9_126 ").click();
+    loginMe("deve", "methed");
     cy.get("._error_acsk9_145 ").contains("Невалидный логин");
   });
 
   it("Авторизация, не валидный логин - пустое поле", () => {
-    cy.get('[name="login"]');
-    cy.get('[name="password"]').type("methed");
-    cy.get("._button_acsk9_126 ").click();
+    loginMe("", "methed");
     cy.get("._error_acsk9_145 ").contains("Введите логин");
   });
 
   it("Авторизация, не верный логин", () => {
-    cy.get('[name="login"]').type("developers");
-    cy.get('[name="password"]').type("methed");
-    cy.get("._button_acsk9_126 ").click();
+    loginMe("developers", "methed");
     cy.get("._error_2j6oj_22 ").contains(
       "Пользователя с таким именем не существует!",
     );
   });
 
   it("Авторизация, не валидный пароль - цифра", () => {
-    cy.get('[name="login"]').type("developer");
-    cy.get('[name="password"]').type("methed1");
-    cy.get("._button_acsk9_126 ").click();
+    loginMe("developer", "methed1");
     cy.get("._error_acsk9_145 ").contains("Невалидный пароль");
   });
 
   it("Авторизация, не валидный пароль - кириллица", () => {
-    cy.get('[name="login"]').type("developer");
-    cy.get('[name="password"]').type("methedк");
-    cy.get("._button_acsk9_126 ").click();
+    loginMe("developer", "methedк");
     cy.get("._error_acsk9_145 ").contains("Невалидный пароль");
   });
 
   it("Авторизация, не валидный пароль - меньше 6 символов", () => {
-    cy.get('[name="login"]').type("developer");
-    cy.get('[name="password"]').type("meteh");
-    cy.get("._button_acsk9_126 ").click();
+    loginMe("developer", "meteh");
     cy.get("._error_acsk9_145 ").contains("Невалидный пароль");
   });
 
   it("Авторизация, не валидный пароль - пустое поле", () => {
-    cy.get('[name="login"]').type("developer");
-    cy.get('[name="password"]');
-    cy.get("._button_acsk9_126 ").click();
+    loginMe("developer", "");
     cy.get("._error_acsk9_145 ").contains("Введите пароль");
   });
 
   it("Авторизация, не верный пароль", () => {
-    cy.get('[name="login"]').type("developer");
-    cy.get('[name="password"]').type("methedo");
-    cy.get("._button_acsk9_126 ").click();
+    loginMe("developer", "methedo");
     cy.get("._error_2j6oj_22 ").contains("Вы ввели не верный пароль!");
   });
 
   it("Авторизация - успех", () => {
-    cy.get('[name="login"]').type("developer");
-    cy.get('[name="password"]').type("methed");
-    cy.get("._button_acsk9_126 ").click();
+    loginMe("developer", "methed");
     cy.request("POST", "https://c-money-api.onrender.com/login", {
       login: "developer",
       password: "methed",
