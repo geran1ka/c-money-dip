@@ -10,9 +10,9 @@ export function loginMe(login, password) {
   cy.contains("Войти").click();
 }
 
-describe("Тестируем ", () => {
+describe("C-Money", () => {
   beforeEach(() => {
-    cy.visit("https://c-money-dip.vercel.app/");
+    cy.visit("/");
   });
 
   it("Авторизация, не валидный логин - цифра", () => {

@@ -1,33 +1,55 @@
-# React + Vite
+Приложение C-Money (React)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Проект был создан с помощью Vite.
 
-Currently, two official plugins are available:
+Запуск сервера
+Чтобы запустить бэкенд локально, необходимо склонить репозиторий https://github.com/maksim-leskin/c-money-api на диск и выбрать следующие команды:
+`npm i`
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+`npm start`
 
-становить eslint глобально (для плагина VSCode)
+По умолчанию сервер слушает на 3000-ом порту localhost.
 
-npm install eslint -g
+Или же сервер также доступен по ссылкам:
 
-Установить prettier глобально (для плагина VSCode)
+1. Versel: https://c-money-api-cyan.vercel.app/
+2. Render: https://c-money-api.onrender.com/
 
-npm install prettier -g
+Запуск приложения
 
-Установить eslint в проект
+Чтобы запустить React-приложение, необходимо ввести эту команду
 
-npm install eslint eslint-plugin-react -D
+1. `npm i` - произойдет установка всех зависимостей.
 
-Установить prettier в проект
+2. `npm dev` - запуск приложения в режиме разработки.
 
-npm install eslint-config-prettier eslint-plugin-prettier prettier -D
-scripts для package.json
+3. `npm build` - сборка приложения.
 
-"lint": "eslint .","lint:fix": "eslint --fix","format": "prettier --write './\*_/_.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc"
+4. `npm preview` - запуск приложения по http://localhost:4173/
 
-extends для .eslintrc
+5. Для авторизации в приложении необходимо использовать:
 
-"plugin:prettier/recommended",
-# viteReactEslintPrettier
-# c-money-dip
+   Логин: developer
+
+   Пароль: methed
+
+Для запуска тестов, описанных в файле README, вам потребуется выполнить следующие шаги:
+
+1. Установите Cypress, если он еще не установлен, с помощью команды:
+
+`npm install cypress --save-dev`
+
+2. Запустите Cypress с помощью команды:
+
+`npx cypress open`
+
+3. После запуска Cypress, вы увидите окно браузера с тестовым фреймворком. Нажмите на кнопку "Configured" в оокошке E2E Testing. В следующем окне выбирете браузер и нажмите кнопку "Start E2E Testing browser"
+
+4. Выбирите test который вы хотите запустить:
+
+auth.cy.js - тестирование авторизации;
+createAccount.cy.js - тестирование создания нового счета и перевода на данный счет суммы 100 и обратного перевода суммы 50;
+transfarAmount.cy.js - тестирования перевода со счета на счет;
+viewListOfAmount.cy.js - тестирования возможности просмотра списка счетов;
+
+5. После завершения тестов, вы увидите результаты в окне Cypress. Если все тесты прошли успешно, вы увидите зеленую галочки на против теста. Если есть неудачные тесты, вы увидите красную галочку и сообщение с описанием ошибок.

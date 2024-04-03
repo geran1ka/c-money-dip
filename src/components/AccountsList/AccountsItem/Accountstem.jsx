@@ -9,7 +9,9 @@ export const AccountsItem = ({ props }) => {
       <p className={s.id} data-test="account-number">
         {account}
       </p>
-      <p className={s.balance}>{balance.toLocaleString()}</p>
+      <p className={s.balance} data-test="account-balance">
+        {balance.toLocaleString()}
+      </p>
       <div className={s.info}>
         <div>
           <p>открыт</p>
