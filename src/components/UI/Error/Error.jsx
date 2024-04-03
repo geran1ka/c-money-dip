@@ -19,14 +19,12 @@ export const Error = ({ error, className = "" }) => {
   );
 };
 
-export const ErrorMini = ({ error, className = "" }) => {
+export const ErrorMini = ({ error, className = "", test = "" }) => {
   const isRussianLanguage = getIsRussianLanguage(error);
   console.log("isRussianLanguage: ", isRussianLanguage);
 
   return (
-    <p
-      className={classNames(s.error, className && className)}
-      data-test="auth-error">
+    <p className={classNames(s.error, className && className)} data-test={test}>
       {isRussianLanguage ? error : getMessageErrorRu(error)}
     </p>
   );

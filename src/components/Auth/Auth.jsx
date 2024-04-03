@@ -85,7 +85,9 @@ export const Auth = () => {
               Войти
             </button>
           </form>
-          {error && <ErrorMini className={s.error} error={error} />}
+          {error && (
+            <ErrorMini className={s.error} error={error} test="auth-error" />
+          )}
         </div>
       </div>
     </Container>
