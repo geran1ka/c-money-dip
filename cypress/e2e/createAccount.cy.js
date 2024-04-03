@@ -1,4 +1,4 @@
-/// <reference types="cypress" />
+// / <reference types="cypress" />
 function loginMe(login, password) {
   cy.get('[name="login"]').type(login);
   cy.get('[name="password"]').type(password);
@@ -12,34 +12,58 @@ describe("Тестируем ", () => {
 
   it("Проверка наличия элементов списка счетов", () => {
     loginMe("developer", "methed");
-    cy.get("._list_l10mq_148").find("li").should("have.length.greaterThan", 0);
-
-    // const sum = 100;
-    // cy.get('[name="to"]').type(account);
-    // cy.get('[name="amount"]').type(sum);
-    // cy.contains("Перевести").click();
+    cy.get('[data-test="accounts"]')
+      .find("li")
+      .should("have.length.greaterThan", 0);
   });
 
-  it.only("Перевод с одного счета на другой нового счета", () => {
+  it.only("Создать новый счет", () => {
     loginMe("developer", "methed");
-    cy.get("._card_l10mq_169").first().click();
-    cy.get('[id="listSelect"]').get("option").last();
+    cy.get('[data-test="accounts"]')
+      .find("li")
+      .then(($accountsList) => {
+        const accountLength = $accountsList.length;
+        cy.get($accountsList).should("have.length", accountLength);
+        // cy.contains("Открыть новый счет").click();
+        // cy.get('[data-test="accounts"]')
+        //   .find("li")
+        //   .should("have.length.greaterThan", accountLength);
+      });
 
-    // const sum = 100;
-    // cy.get('[name="to"]').type(account);
-    // cy.get('[name="amount"]').type(sum);
-    // cy.contains("Перевести").click();
+    cy.get('[data-test="account-number"]')
+      .last()
+      .then(($account) => {
+        const accountNumber = $account.text();
+        const sum = 1000;
+        cy.get('[data-test="account"]').first().click();
+        cy.get('[name="to"]').type(accountNumber);
+        cy.get('[name="amount"]').type(sum);
+        cy.contains("Перевести").click();
+        cy.contains("Вернуться").click();
+      });
+
+    cy.get('[data-test="account-number"]')
+      .first()
+      .then(($account) => {
+        const accountNumber = $account.text();
+        const sum = 100;
+        cy.get('[data-test="account"]').last().click();
+        cy.get('[name="to"]').type(accountNumber);
+        cy.get('[name="amount"]').type(sum);
+        cy.contains("Перевести").click();
+        cy.contains("Вернуться").click();
+      });
   });
 
-  it("Создать новый счет", () => {
+  it("Перевод с одного счета на другой нового счета", () => {
     loginMe("developer", "methed");
-    // cy.contains("Открыть новый счет").click();
-    cy.get("._id_1mdc4_2")
+
+    cy.get('[data-test="account-number"]')
       .last()
       .then(($account) => {
         const accountNumber = $account.text();
         const sum = 100;
-        cy.get("._card_l10mq_169").first().click();
+        cy.get('[data-test="account"]').first().click();
         cy.get('[name="to"]').type(accountNumber);
         cy.get('[name="amount"]').type(sum);
         cy.contains("Перевести").click();
