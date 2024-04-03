@@ -1,6 +1,6 @@
-Приложение C-Money (React)					
+#Приложение C-Money (React)					
 Проект был создан с помощью Vite.
-Запуск сервера										
+##Запуск сервера										
 Чтобы запустить бэкенд локально, необходимо склонить репозиторий https://github.com/maksim-leskin/c-money-api на диск и выбрать следующие команды:
 npm i
 npm run start
@@ -9,7 +9,7 @@ npm run start
 1. Versel: https://c-money-api-cyan.vercel.app/
 2. Render: https://c-money-api.onrender.com/
 
-Запуск приложения									
+##Запуск приложения									
 Чтобы запустить React-приложение, необходимо ввести эту команду
 1. npm i - произойдет установка всех зависимостей.
 2. npm run dev - запуск приложения в режиме разработки.
@@ -19,7 +19,7 @@ npm run start
    Логин: developer
    Пароль: methed
 
-Тесты												
+##Тесты												
 1. Установите Cypress, если он еще не установлен, с помощью команды:
 npm install cypress --save-dev
 2. Запустите Cypress с помощью команды:
