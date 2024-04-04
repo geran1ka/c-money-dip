@@ -5,6 +5,9 @@ import { randomId } from "../../../helper/randomId";
 import { getBalancesYear } from "../../../helper/getBalancesYeat";
 
 export const Dinamic = ({ account, transactions }) => {
+  console.log("transactions: ", transactions);
+
+  // console.log("sortTransaction: ", sortTransaction);
   // const { account, transactions } = useSelector((state) => state.account);
 
   const selectYears = [
@@ -13,6 +16,8 @@ export const Dinamic = ({ account, transactions }) => {
 
   const [dinamicsByYear, setDinamicsByYear] = useState(selectYears[0]);
   const balancesByYearObj = getBalancesYear(transactions, account);
+
+  console.log("balancesByYearObj: ", balancesByYearObj);
 
   const handlerChangeYears = (e) => {
     setDinamicsByYear(+e.target.value);

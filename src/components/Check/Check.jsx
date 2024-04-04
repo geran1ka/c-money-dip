@@ -19,11 +19,11 @@ export const Check = () => {
 
   const loading = useSelector((state) => state.account.loading);
   const error = useSelector((state) => state.account.error);
-  const accountInfo = useSelector((state) => state.account.account);
+  const { account, transactions } = useSelector(
+    (state) => state.account.account,
+  );
 
-  const { account, transactions } = accountInfo || {};
-  console.log("transactions: ", transactions);
-  console.log("account: ", account);
+  // const { account, transactions } = accountInfo || {};
 
   const navigate = useNavigate();
   useEffect(() => {
