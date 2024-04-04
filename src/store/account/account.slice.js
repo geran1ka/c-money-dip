@@ -22,7 +22,7 @@ export const fetchAccount = createAsyncThunk(
       if (data.error) {
         throw new Error(data.error);
       }
-      return data;
+      return data.payload;
     } catch (error) {
       return rejectWithValue(error);
     }
@@ -34,7 +34,7 @@ export const fetchTransferAmount = createAsyncThunk(
   async (info, { getState, rejectWithValue }) => {
     try {
       const accessToken = getState().auth.accessToken;
-      const from = getState().account.account;
+      const from = getState().account.account.account;
       console.log("from: ", from);
       const { to, amount } = info;
 
@@ -68,7 +68,7 @@ export const fetchTransferAmount = createAsyncThunk(
       }
 
       console.log("data: ", data);
-      return data;
+      return data.payload;
     } catch (error) {
       return rejectWithValue(error);
     }
@@ -76,8 +76,7 @@ export const fetchTransferAmount = createAsyncThunk(
 );
 
 const initialState = {
-  account: "",
-  transactions: [],
+  account: {},
   loading: false,
   error: "",
   errorTransferAmount: "",
@@ -94,9 +93,7 @@ const accountSlice = createSlice({
         state.error = "";
       })
       .addCase(fetchAccount.fulfilled, (state, action) => {
-        console.log("action: ", action);
-        state.account = action.payload.payload.account;
-        state.transactions = action.payload.payload.transactions;
+        state.account = action.payload;
         state.loading = false;
         state.error = "";
         state.errorTransferAmount = "";
@@ -105,12 +102,9 @@ const accountSlice = createSlice({
         state.loading = false;
         state.error = action.payload.message;
       })
-      .addCase(fetchTransferAmount.pending, (state) => {
-        state.errorTransferAmount = "";
-      })
       .addCase(fetchTransferAmount.fulfilled, (state, action) => {
         console.log("action: ", action);
-        state.transactions = action.payload.payload.transactions;
+        state.account = action.payload;
         state.errorTransferAmount = "";
       })
       .addCase(fetchTransferAmount.rejected, (state, action) => {

@@ -16,11 +16,11 @@ export const AccountsItem = ({ props }) => {
         <div>
           <p>открыт</p>
           <p>
-            {date
-              ? new Date(date).toLocaleDateString()
-              : transactions[0]?.date
-                ? new Date(transactions[0]?.date).toLocaleDateString()
-                : "Нет данных"}
+            {date ?
+              new Date(date).toLocaleDateString() :
+              transactions[0]?.date ?
+                new Date(transactions[0]?.date).toLocaleDateString() :
+                "Нет данных"}
           </p>
         </div>
         <div>

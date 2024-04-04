@@ -16,9 +16,14 @@ export const Check = () => {
   const dispatch = useDispatch();
   const accountId = useParams().id;
   const accessToken = useSelector((state) => state.auth.accessToken);
-  const { account, balance, transactions, loading, error } = useSelector(
-    (state) => state.account,
-  );
+
+  const loading = useSelector((state) => state.account.loading);
+  const error = useSelector((state) => state.account.error);
+  const accountInfo = useSelector((state) => state.account.account);
+
+  const { account, transactions } = accountInfo || {};
+  console.log("transactions: ", transactions);
+  console.log("account: ", account);
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -61,7 +66,7 @@ export const Check = () => {
             )}
             <History transactions={transactions} account={account} />
             <Transaction />
-            <Statistic transactions={transactions} account={account} />
+            {/* <Statistic transactions={transactions} account={account} /> */}
           </>
         )}
       </div>
