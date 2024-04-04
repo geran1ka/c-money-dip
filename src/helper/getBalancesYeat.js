@@ -1,12 +1,8 @@
 export const getBalancesYear = (data, account) => {
-  console.log("account: ", account);
-  console.log("data: ", data);
-  console.log("1");
   const balance = {};
 
   data.reduce((acc, item) => {
     const res = acc + item.amount * (account === item.to ? 1 : -1);
-    console.log("res: ", res);
     const date = new Date(item.date.slice(0, -1));
     const year = date.getFullYear();
     const month = date.getMonth();
@@ -23,7 +19,6 @@ export const getBalancesYear = (data, account) => {
     }
 
     if (item.from === account) {
-      console.log("from");
       balance[year].month[month].expense += item.amount;
     }
 

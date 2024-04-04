@@ -8,7 +8,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAccount } from "../../store/account/account.slice";
-// import { Statistic } from "./Statistic/Statistic";
+import { Statistic } from "./Statistic/Statistic";
 import { Preloader } from "../Preloader/Preloader";
 import { Error } from "../UI/Error/Error";
 
@@ -16,11 +16,9 @@ export const Check = () => {
   const dispatch = useDispatch();
   const accountId = useParams().id;
   const accessToken = useSelector((state) => state.auth.accessToken);
-  const { account, transactions, loading, error } = useSelector(
+  const { account, balance, transactions, loading, error } = useSelector(
     (state) => state.account,
   );
-
-  console.log("transactions: ", transactions);
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -63,7 +61,7 @@ export const Check = () => {
             )}
             <History transactions={transactions} account={account} />
             <Transaction />
-            {/* <Statistic transactions={transactions} balance={balance} /> */}
+            <Statistic transactions={transactions} account={account} />
           </>
         )}
       </div>

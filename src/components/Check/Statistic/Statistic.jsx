@@ -2,6 +2,7 @@ import s from "./Statistic.module.scss";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import classNames from "classnames";
 import { Doughnut } from "react-chartjs-2";
+import { getBalancesYear } from "../../../helper/getBalancesYeat";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -30,8 +31,12 @@ const options = {
   },
 };
 
-export const Statistic = ({ transactions, balance }) => {
-  console.log(transactions);
+export const Statistic = ({ transactions, account }) => {
+  const balancesByYearObj = getBalancesYear(transactions, account);
+  const yearStat = "2024";
+  // const newObj = ;
+  // console.log("newObj: ", newObj);
+
   return (
     <div className={s.statistic}>
       <h2>Статистика</h2>
