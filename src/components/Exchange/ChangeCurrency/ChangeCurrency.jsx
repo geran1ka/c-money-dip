@@ -26,7 +26,6 @@ export const ChangeCurrency = () => {
     register,
     handleSubmit,
     formState: { errors },
-
     watch,
   } = useForm();
 

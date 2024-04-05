@@ -54,18 +54,15 @@ const data = {
 };
 
 export const LineChart = ({ balanceYear }) => {
+  console.log("balanceYear: ", balanceYear);
   const balance = getArrayIsObject(balanceYear?.month);
+  console.log("balance: ", balance);
   data.labels = [];
 
-  data.datasets[0].data = balance
-    .slice(balance.length - 6 < 0 ? 0 : balance.length - 6)
-    .map((item, index, arr) => {
-      const length = arr.length;
-      const key = Object.keys(item);
-      if (length - index <= 6) {
-        return { x: getPointsLine(key), y: round(item[key].balance) };
-      }
-    });
+  data.datasets[0].data = balance.map((item) => {
+    const key = Object.keys(item);
+    return { x: getPointsLine(key), y: round(item[key].balance) };
+  });
 
   return <Line options={options} data={data} redraw />;
 };

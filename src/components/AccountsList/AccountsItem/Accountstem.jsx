@@ -15,13 +15,7 @@ export const AccountsItem = ({ props }) => {
       <div className={s.info}>
         <div>
           <p>открыт</p>
-          <p>
-            {date
-              ? new Date(date).toLocaleDateString()
-              : transactions[0]?.date
-                ? new Date(transactions[0]?.date).toLocaleDateString()
-                : "Нет данных"}
-          </p>
+          <p>{date ? new Date(date).toLocaleDateString() : "нет данных"}</p>
         </div>
         <div>
           <p>последняя операция</p>

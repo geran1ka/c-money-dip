@@ -1,3 +1,4 @@
+import { randomId } from "../../../helper/randomId";
 import s from "./History.module.scss";
 import { Row } from "./Row/Row";
 
@@ -16,8 +17,12 @@ export const History = ({ transactions, account }) => (
               </tr>
             </thead>
             <tbody className={s.tbody}>
-              {transactions.map((transaction, index) => (
-                <Row key={index} transaction={transaction} account={account} />
+              {[...transactions].reverse().map((transaction) => (
+                <Row
+                  key={randomId()}
+                  transaction={transaction}
+                  account={account}
+                />
               ))}
             </tbody>
           </table>

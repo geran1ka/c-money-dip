@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { fetchTransferAmount } from "../../../store/account/account.slice";
 import { randomId } from "../../../helper/randomId";
 import { ErrorMini } from "../../UI/Error/Error";
+import { useEffect, useState } from "react";
 
 export const Transaction = () => {
   const dispatch = useDispatch();
@@ -12,13 +13,32 @@ export const Transaction = () => {
     (state) => state.account.errorTransferAmount,
   );
   const { accounts } = useSelector((state) => state.accounts);
+  const { account } = useSelector((state) => state.account.account);
+  console.log("account: ", account);
+  const [accountTo, setAccountTo] = useState("");
+
+  // const handlerOnchange = (e) => {
+  //   console.log("e: ", e);
+  //   setAccountTo(e.target.input.value);
+  //   console.log("e.target.value): ", e.target.value);
+  // };
 
   const {
     reset,
     register,
     handleSubmit,
     formState: { errors },
+    watch,
+    setValue,
   } = useForm();
+
+  const to = watch("to");
+
+  useEffect(() => {
+    const defaultValues = {};
+    defaultValues.to = "---";
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const onSubmit = (data) => {
     console.log("data: ", data);
@@ -69,7 +89,10 @@ export const Transaction = () => {
             })}
           />
         </div>
-        <button type="submit" className={classNames(s.button, "button")}>
+        <button
+          type="submit"
+          className={classNames(s.button, "button")}
+          disabled={account === to ? true : false}>
           Перевести
         </button>
         {errorTransferAmount && (
