@@ -2,7 +2,7 @@
   display: grid;
   grid-template-columns: minmax(300px, 500px);
   grid-template-rows: min-content repeat(3, min-content);
-  grid-template-areas: "title" "dinamics" "history" "transactions";
+  grid-template-areas: "title" "info" "history" "transactions";
   padding-top: 45px;
   gap: 10px;
 
@@ -13,17 +13,17 @@
   }
 
   @media (min-width: 768px) {
-    grid-template-columns: minmax(400px, 580px) minmax(280px, 360px);
-    grid-template-rows: min-content repeat(2, min-content);
-    grid-template-areas: "title title" "dinamics transactions" "history transactions";
-    justify-content: space-between;
+    grid-template-columns: minmax(400px, 580px);
+    // grid-template-rows: min-content repeat(2, min-content);
+    // // grid-template-areas: "title title" "info transactions" "history transactions";
+    // justify-content: space-between;
     gap: 20px;
   }
 
   @media (min-width: 1040px) {
     grid-template-columns: repeat(2, minmax(300px, 580px));
     grid-template-rows: min-content repeat(2, min-content);
-    grid-template-areas: "title title" "dinamics history" "transactions transactions";
+    grid-template-areas: "title title" "info history" "transactions transactions";
     justify-content: space-between;
     gap: 20px;
   }
@@ -84,6 +84,10 @@
     font-size: 18px;
     padding: 12px 30px;
   }
+}
+
+.info {
+  grid-area: info;
 }
 
 .error {

@@ -2,21 +2,9 @@ import { useState } from "react";
 import s from "./Dinamic.module.scss";
 import { LineChart } from "./Line/Line";
 import { randomId } from "../../../helper/randomId";
-import { getBalancesYear } from "../../../helper/getBalancesYeat";
 
-export const Dinamic = ({ account, transactions, balance }) => {
-  // const { account, transactions } = useSelector((state) => state.account);
-
-  const selectYears = [
-    ...new Set(
-      [...transactions]
-        .reverse()
-        .map((item) => new Date(item.date).getFullYear()),
-    ),
-  ];
-
+export const Dinamic = ({ selectYears, balancesByYearObj }) => {
   const [dinamicsByYear, setDinamicsByYear] = useState(selectYears[0]);
-  const balancesByYearObj = getBalancesYear(transactions, account, balance);
 
   const handlerChangeYears = (e) => {
     setDinamicsByYear(+e.target.value);

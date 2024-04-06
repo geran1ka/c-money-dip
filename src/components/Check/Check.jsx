@@ -8,9 +8,10 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAccount } from "../../store/account/account.slice";
-// import { Statistic } from "./Statistic/Statistic";
+import { Statistic } from "./Statistic/Statistic";
 import { Preloader } from "../Preloader/Preloader";
 import { Error } from "../UI/Error/Error";
+import { getBalancesYear } from "../../helper/getBalancesYeat";
 
 export const Check = () => {
   const dispatch = useDispatch();
@@ -21,7 +22,18 @@ export const Check = () => {
   const error = useSelector((state) => state.account.error);
   const accountData = useSelector((state) => state.account.account);
 
-  const { account, balance, transactions } = accountData;
+  const { account, balance, transactions = [] } = accountData;
+  console.log("transactions: ", transactions);
+
+  const selectYears = [
+    ...new Set(
+      [...transactions]
+        .reverse()
+        .map((item) => new Date(item.date).getFullYear()),
+    ),
+  ];
+
+  const balancesByYearObj = getBalancesYear(transactions, account, balance);
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -60,15 +72,20 @@ export const Check = () => {
               </Link>
             </div>
             {transactions?.length > 0 && (
-              <Dinamic
-                transactions={transactions}
-                account={account}
-                balance={balance}
-              />
+              <div className={s.info}>
+                <Dinamic
+                  selectYears={selectYears}
+                  balancesByYearObj={balancesByYearObj}
+                />
+                <Statistic
+                  balancesByYearObj={balancesByYearObj}
+                  balance={balance}
+                />
+              </div>
             )}
             <History transactions={transactions} account={account} />
+
             <Transaction />
-            {/* <Statistic transactions={transactions} account={account} /> */}
           </>
         )}
       </div>

@@ -1,4 +1,4 @@
-export const getBalancesYear = (data, account, balance) => {
+export const getBalancesYear = (data = [], account, balance) => {
   const balanceObj = {};
 
   [...data].reverse().reduce((acc, item) => {
