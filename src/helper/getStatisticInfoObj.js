@@ -1,6 +1,7 @@
 import { getArrayIsObject } from "./getArrayIsObject";
 
 export const getStatisticInfoObj = (balancesByYearObj, timePeriod) => {
+  console.log("timePeriod: ", timePeriod);
   const statisticInfo = {
     income: 0,
     expense: 0,
