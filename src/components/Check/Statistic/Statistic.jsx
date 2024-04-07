@@ -22,6 +22,7 @@ const options = {
 
 export const Statistic = ({ balancesByYearObj, balance }) => {
   const [timePeriod, setTimePeriod] = useState("year");
+  console.log("timePeriod: ", timePeriod);
   const statisticInfo = getStatisticInfoObj(balancesByYearObj, timePeriod);
 
   console.log("statisticInfo: ", statisticInfo);
@@ -40,6 +41,8 @@ export const Statistic = ({ balancesByYearObj, balance }) => {
   ];
 
   const handlerClick = (e) => {
+    console.log(e.target);
+    console.log(e.target.value);
     setTimePeriod(e.target.value);
   };
 
