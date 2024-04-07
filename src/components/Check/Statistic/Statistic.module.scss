@@ -43,6 +43,10 @@
   outline: none;
   border: none;
   text-align: left;
+
+  & span {
+    pointer-events: none;
+  }
 }
 
 .active {
