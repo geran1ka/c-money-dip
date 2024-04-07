@@ -41,8 +41,6 @@ export const Statistic = ({ balancesByYearObj, balance }) => {
   ];
 
   const handlerClick = (e) => {
-    console.log(e.target);
-    console.log(e.target.value);
     setTimePeriod(e.target.value);
   };
 
@@ -66,7 +64,7 @@ export const Statistic = ({ balancesByYearObj, balance }) => {
             onClick={handlerClick}
             type="button"
             value="month">
-            Месяц
+            <span>Месяц</span>
           </button>
           <button
             className={classNames(s.buttonS, timePeriod === "year" && s.active)}
