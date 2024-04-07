@@ -104,6 +104,3 @@ export const Statistic = ({ balancesByYearObj, balance }) => {
     </div>
   );
 };
-
-// income 4B00CA
-// expenses B865D6

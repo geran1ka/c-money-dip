@@ -4,14 +4,29 @@
   padding: 20px;
   display: flex;
   flex-direction: column;
+
   gap: 40px;
 }
 
 .content {
-  display: flex;
-  justify-content: space-between;
+  width: 100%;
+  display: grid;
+  grid-template-columns: min-content;
+  grid-template-rows: min-content;
+  grid-template-areas: "btns" "diagramma" "info";
+  gap: 20px 10px;
+  justify-content: center;
 
-  gap: 10px;
+  @media (min-width: 540px) {
+    grid-template-columns: min-content min-content;
+    grid-template-areas: "btns btns" "diagramma info";
+    justify-content: space-between;
+  }
+
+  @media (min-width: 768px) {
+    grid-template-columns: min-content min-content min-content;
+    grid-template-areas: "btns diagramma info";
+  }
 }
 
 .title {
@@ -31,10 +46,17 @@
 }
 
 .leftBlock {
+  grid-area: btns;
   display: flex;
-  flex-direction: column;
   gap: 16px;
-  justify-content: center;
+  justify-content: space-evenly;
+  max-width: 150px;
+  margin: 0 auto;
+
+  @media (min-width: 768px) {
+    flex-direction: column;
+    justify-content: center;
+  }
 }
 
 .buttonS {
@@ -43,6 +65,15 @@
   outline: none;
   border: none;
   text-align: left;
+  font-size: 12px;
+
+  @media (min-width: 768px) {
+    font-size: 14px;
+  }
+
+  @media (min-width: 1040px) {
+    font-size: 15px;
+  }
 
   & span {
     pointer-events: none;
@@ -54,25 +85,23 @@
 }
 
 .centerBlock {
-  max-width: 100px;
-
-  @media (min-width: 540px) {
-    max-width: 221px;
-  }
-
-  @media (min-width: 768px) {
-    max-width: 221px;
-  }
+  grid-area: diagramma;
+  max-width: 221px;
 }
 
 .rightBlock {
+  grid-area: info;
   display: flex;
   flex-direction: column;
   gap: 16px;
   justify-content: center;
+  max-width: 150px;
+  margin: 0 auto;
   font-size: 12px;
 
   @media (min-width: 768px) {
+    min-width: 170px;
+
     font-size: 14px;
   }
 

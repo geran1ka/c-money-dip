@@ -92,7 +92,7 @@ export const Transaction = () => {
         <button
           type="submit"
           className={classNames(s.button, "button")}
-          disabled={account === to ? true : false}>
+          disabled={account === to}>
           Перевести
         </button>
         {errorTransferAmount && (
