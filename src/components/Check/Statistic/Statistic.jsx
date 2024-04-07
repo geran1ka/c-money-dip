@@ -54,7 +54,7 @@ export const Statistic = ({ balancesByYearObj, balance }) => {
             onClick={handlerClick}
             type="button"
             value="week">
-            Неделя
+            <span>Неделя</span>
           </button>
           <button
             className={classNames(
@@ -71,7 +71,7 @@ export const Statistic = ({ balancesByYearObj, balance }) => {
             onClick={handlerClick}
             type="button"
             value="year">
-            Год
+            <span>Год</span>
           </button>
         </div>
         <div className={s.centerBlock}>
